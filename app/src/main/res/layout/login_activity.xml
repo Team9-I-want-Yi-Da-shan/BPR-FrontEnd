@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <ImageView
+        android:id="@+id/Login_HomeLogo"
+        android:layout_width="306dp"
+        android:layout_height="304dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/home_logo" />
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Login_UsernameTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_marginTop="20dp"
+        android:hint="@string/username"
+        app:endIconMode="clear_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_HomeLogo"
+        app:startIconDrawable="@drawable/ic_username">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="300dp"
+            android:layout_height="55dp" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/Login_PasswordTextField"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+
+        android:hint="@string/password"
+        app:endIconMode="password_toggle"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_UsernameTextField"
+        app:startIconDrawable="@drawable/ic_password">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="300dp"
+            android:layout_height="55dp"
+            android:inputType="textPassword" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/Login_Button"
+        android:layout_width="300dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="15dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_PasswordTextField"
+        app:lottie_rawRes="@raw/button_login"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="false" />
+
+
+    <RelativeLayout
+        android:id="@+id/relativeLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@+id/Login_Facebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginStart="50dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="50dp"
+            android:background="@color/black_100" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@android:color/white"
+            android:padding="2dp"
+            android:text="OR" />
+    </RelativeLayout>
+
+
+    <ImageButton
+        android:id="@+id/Login_Google"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginStart="33dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Login_Facebook"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button"
+        app:layout_constraintVertical_bias="0.38"
+        app:srcCompat="@drawable/ic_google" />
+
+    <ImageButton
+        android:id="@+id/Login_Facebook"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Login_Twitter"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Login_Google"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button"
+        app:layout_constraintVertical_bias="0.38"
+        app:srcCompat="@drawable/ic_facebook" />
+
+    <ImageButton
+        android:id="@+id/Login_Twitter"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/Login_Instagram"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Login_Facebook"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button"
+        app:layout_constraintVertical_bias="0.38"
+        app:srcCompat="@drawable/ic_twitter" />
+
+    <ImageButton
+        android:id="@+id/Login_Instagram"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="33dp"
+        android:backgroundTint="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/Login_Twitter"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button"
+        app:layout_constraintVertical_bias="0.38"
+        app:srcCompat="@drawable/ic_instagram" />
+
+    <TextView
+        android:id="@+id/Login_SignUpTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:text="No Account? Sign Up→"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Instagram" />
+
+    <TextView
+        android:id="@+id/Login_ForgetPasswordTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:text="Forget Password"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/Login_Google"
+        app:layout_constraintVertical_bias="0.509" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
