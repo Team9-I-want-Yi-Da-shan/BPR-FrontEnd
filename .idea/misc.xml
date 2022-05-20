@@ -5,12 +5,28 @@
       <map>
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5235" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/home_logo_background.xml" value="0.407" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_bill.xml" value="0.4885" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_calendar.xml" value="0.4885" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_calender_home.xml" value="0.4885" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_email.xml" value="0.4885" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_facebook.xml" value="0.407" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_family.xml" value="0.4885" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_github.xml" value="0.407" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_google.xml" value="0.407" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_launcher_background.xml" value="0.5235" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_plan.xml" value="0.4885" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_smart_home.xml" value="0.4885" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_username.xml" value="0.407" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_wifi_device.xml" value="0.4885" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_wireless.xml" value="0.4885" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/username_icon.xml" value="0.5235" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_family_plan.xml" value="0.28489583333333335" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_family_schedule.xml" value="0.2682291666666667" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_login.xml" value="0.33" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_main.xml" value="0.5" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_personal_plan.xml" value="0.1" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_personal_schedule.xml" value="0.525" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_smart_home.xml" value="0.28489583333333335" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_start.xml" value="0.2542885973763875" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/login_activity.xml" value="0.5" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/mipmap-anydpi-v26/home_logo.xml" value="0.2925" />

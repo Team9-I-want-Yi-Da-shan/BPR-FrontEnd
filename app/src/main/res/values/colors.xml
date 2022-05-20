@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black_100">#1A202E</color>
+    <color name="black_100">#1A1A1A</color>
+    <color name="blue_link">#1e90ff</color>
 
+    <color name="card">#3d3d3d</color>
 
     <color name="purple_200">#FFBB86FC</color>
     <color name="purple_500">#FF6200EE</color>

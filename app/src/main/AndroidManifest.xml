@@ -10,16 +10,31 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Home">
         <activity
-            android:name=".View.StartActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+            android:name=".View.BillActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.SmartHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.FamilyPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.FamilyScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.PersonalPlanActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.PersonalScheduleActivity"
+            android:exported="false" />
+        <activity
+            android:name=".View.MainActivity"
+            android:exported="false"/>
         <activity
             android:name=".View.LoginActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".View.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

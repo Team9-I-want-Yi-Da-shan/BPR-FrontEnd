@@ -8,9 +8,9 @@
 
     <ImageView
         android:id="@+id/Login_HomeLogo"
-        android:layout_width="306dp"
-        android:layout_height="304dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginTop="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -23,13 +23,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="20dp"
-        android:hint="@string/username"
+        android:layout_marginTop="80dp"
+        android:hint="@string/email"
         app:endIconMode="clear_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_HomeLogo"
-        app:startIconDrawable="@drawable/ic_username">
+        app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
             android:layout_width="300dp"
@@ -64,7 +64,7 @@
         android:id="@+id/Login_Button"
         android:layout_width="300dp"
         android:layout_height="50dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_PasswordTextField"
@@ -80,7 +80,8 @@
         app:layout_constraintBottom_toTopOf="@+id/Login_Facebook"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_Button">
+        app:layout_constraintTop_toBottomOf="@+id/Login_Button"
+        app:layout_constraintVertical_bias="0.61">
 
         <View
             android:layout_width="match_parent"
@@ -105,39 +106,36 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginStart="33dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Login_Facebook"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Login_Button"
-        app:layout_constraintVertical_bias="0.38"
         app:srcCompat="@drawable/ic_google" />
 
     <ImageButton
         android:id="@+id/Login_Facebook"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Login_Twitter"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Login_Google"
         app:layout_constraintTop_toBottomOf="@+id/Login_Button"
-        app:layout_constraintVertical_bias="0.38"
         app:srcCompat="@drawable/ic_facebook" />
 
     <ImageButton
         android:id="@+id/Login_Twitter"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/Login_Instagram"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Login_Facebook"
         app:layout_constraintTop_toBottomOf="@+id/Login_Button"
-        app:layout_constraintVertical_bias="0.38"
         app:srcCompat="@drawable/ic_twitter" />
 
     <ImageButton
@@ -145,13 +143,12 @@
         android:layout_width="60dp"
         android:layout_height="60dp"
         android:layout_marginEnd="33dp"
-        android:backgroundTint="#FFFFFF"
+        android:background="#FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Login_Twitter"
         app:layout_constraintTop_toBottomOf="@+id/Login_Button"
-        app:layout_constraintVertical_bias="0.38"
         app:srcCompat="@drawable/ic_instagram" />
 
     <TextView
@@ -159,6 +156,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
+        android:textColor="@color/blue_link"
         android:text="No Account? Sign Up→"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -169,6 +167,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
+        android:textColor="@color/blue_link"
         android:text="Forget Password"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
