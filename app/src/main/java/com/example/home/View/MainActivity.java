@@ -7,26 +7,26 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.home.R;
+import com.example.home.Tools.Logger;
 import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
 
-    private MaterialCardView personalScheduleCard;
+    private MaterialCardView personalActivityCard;
     private MaterialCardView personalPlanCard;
-    private MaterialCardView familyScheduleCard;
+    private MaterialCardView familyActivityCard;
     private MaterialCardView familyPlanCard;
     private MaterialCardView smartHomeCard;
     private MaterialCardView billCard;
 
     private void findViews(){
-        personalScheduleCard = findViewById(R.id.Main_PersonalActivity);
-        personalPlanCard = findViewById(R.id.Main_PersonalActivity);
-        familyScheduleCard = findViewById(R.id.Main_PersonalActivity);
-        familyPlanCard = findViewById(R.id.Main_PersonalActivity);
-        smartHomeCard = findViewById(R.id.Main_PersonalActivity);
-        billCard = findViewById(R.id.Main_PersonalActivity);
+        personalActivityCard = findViewById(R.id.Main_PersonalActivity);
+        personalPlanCard = findViewById(R.id.Main_PersonalPlan);
+        familyActivityCard = findViewById(R.id.Main_FamilyActivity);
+        familyPlanCard = findViewById(R.id.Main_FamilyPlan);
+        smartHomeCard = findViewById(R.id.Main_SmartHome);
+        billCard = findViewById(R.id.Main_Bill);
     }
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,23 +34,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         findViews();
         setClickCardListeners();
+        Logger.Debug("","进main界面了");
     }
 
 
 
 
 
-
-
-
-
-
     private void setClickCardListeners(){
-        Intent personalScheduleIntent = new Intent(this, PersonalScheduleActivity.class);
-        personalScheduleCard.setOnClickListener(new View.OnClickListener() {
+        Intent personalActivityIntent = new Intent(this, PersonalActivityActivity.class);
+        personalActivityCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(personalScheduleIntent);
+                startActivity(personalActivityIntent);
             }
         });
 
@@ -62,15 +58,15 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent familyScheduleIntent = new Intent(this, FamilyScheduleActivity.class);
-        familyScheduleCard.setOnClickListener(new View.OnClickListener() {
+        Intent familyActivityIntent = new Intent(this, FamilyActivityActivity.class);
+        familyActivityCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(familyScheduleIntent);
+                startActivity(familyActivityIntent);
             }
         });
 
-        Intent familyPlanIntent = new Intent(this, FamilyScheduleActivity.class);
+        Intent familyPlanIntent = new Intent(this, FamilyActivityActivity.class);
         familyPlanCard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

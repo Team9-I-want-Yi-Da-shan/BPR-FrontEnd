@@ -3,4 +3,7 @@
     <string name="username">username</string>
     <string name="password">password</string>
     <string name="email">email</string>
+    <string name="close">close</string>
+    <string name="ok">ok</string>
+    <string name="create_activity">Create Activity</string>
 </resources>
