@@ -3,6 +3,7 @@ package com.example.home.View;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,10 +21,12 @@ public class LoginActivity extends AppCompatActivity {
 
     private TextInputLayout usernameField;
     private TextInputLayout passwordField;
+    private TextView signUpText;
     private LottieAnimationView loginButton;
     private void findViews(){
         usernameField = findViewById(R.id.Login_UsernameTextField);
         passwordField = findViewById(R.id.Login_PasswordTextField);
+        signUpText = findViewById(R.id.Login_SignUpTextView);
         loginButton = findViewById(R.id.Login_Button);
     }
 
@@ -38,6 +41,13 @@ public class LoginActivity extends AppCompatActivity {
 
 
         LoginViewModel loginVM = new ViewModelProvider(this).get(LoginViewModel.class);
+
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                intentToSignUpView();
+            }
+        });
 
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
 //        loginButton.startAnimation(animation);
@@ -91,6 +101,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void intentToSignUpView(){
+        Intent intent= new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+
 
 
 
