@@ -1,219 +1,236 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/CreatePersonalActivity_Card"
-    style="?attr/materialCardViewFilledStyle"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="30dp"
-    android:checkable="false"
-    android:clickable="false"
-    android:focusable="true"
-    app:cardCornerRadius="15dp"
-    app:cardElevation="5dp"
-    app:layout_constraintEnd_toStartOf="@+id/Main_PersonalPlan"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/Main_UserGreeting"
-    android:backgroundTint="@color/white">
 
-    <ImageButton
-        android:id="@+id/CreatePersonalActivity_CloseCreateActivityCard"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_margin="12dp"
-        app:srcCompat="@drawable/ic_close_24dp"
-        android:background="@color/white"/>
+<layout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="personalActivity"
+            type="com.example.home.model.PersonalActivity" />
+    </data>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="20dp"
-        android:layout_marginVertical="40dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content">
 
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/CreatePersonalActivity_TitleTextFieldLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/CreatePersonalActivity_Card"
+            style="?attr/materialCardViewFilledStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Title"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_margin="30dp"
+            android:checkable="false"
+            android:clickable="false"
+            android:focusable="true"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="5dp"
+            app:layout_constraintEnd_toStartOf="@+id/Main_PersonalPlan"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Login_HomeLogo"
-            app:expandedHintEnabled="true">
+            app:layout_constraintTop_toBottomOf="@+id/Main_UserGreeting"
+            android:backgroundTint="@color/white">
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/CreatePersonalActivity_TitleTextField"
+            <ImageButton
+                android:id="@+id/CreatePersonalActivity_CloseCreateActivityCard"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:layout_margin="12dp"
+                app:srcCompat="@drawable/ic_close_24dp"
+                android:background="@color/white"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
+                android:layout_marginHorizontal="20dp"
+                android:layout_marginVertical="40dp"
+                android:orientation="vertical">
 
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/CreatePersonalActivity_TitleTextFieldLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Login_HomeLogo"
+                    app:expandedHintEnabled="true">
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/CreatePersonalActivity_DescriptionTextFieldLayout"
-            style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="5dp"
-            android:hint="Description"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/Login_HomeLogo">
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/CreatePersonalActivity_TitleTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{personalActivity.title}"
+                        />
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/CreatePersonalActivity_DescriptionTextField"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-
-
-        <LinearLayout
-            android:id="@+id/CreatePersonalActivity_StartTimeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
-                android:text="Start Time"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="14dp" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="2dp"
-                app:srcCompat="@drawable/ic_time_24"
-                />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/CreatePersonalActivity_EndTimeLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
-                android:text="End Time"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="14dp" />
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="2dp"
-                app:srcCompat="@drawable/ic_time_24"
-                />
-
-        </LinearLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
 
 
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/CreatePersonalActivity_DescriptionTextFieldLayout"
+                    style="@style/Widget.Material3.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="5dp"
+                    android:hint="Description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/Login_HomeLogo">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/CreatePersonalActivity_DescriptionTextField"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@{personalActivity.description}"/>
+
+                </com.google.android.material.textfield.TextInputLayout>
 
 
-        <LinearLayout
-            android:id="@+id/CreatePersonalActivity_RepeatLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="13dp"
-                android:text="Repeat"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:id="@+id/CreatePersonalActivity_RepeatTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="14dp"
-                android:text="Off"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="2dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right_24"
-                />
 
-        </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/CreatePersonalActivity_StartTimeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="13dp"
+                        android:text="Start Time"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="14dp"
+                        android:text="@{personalActivity.startTime.toString()}"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="2dp"
+                        app:srcCompat="@drawable/ic_time_24"
+                        />
 
+                </LinearLayout>
 
-        <LinearLayout
-            android:id="@+id/CreatePersonalActivity_RemindLayout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="8dp"
-            android:orientation="horizontal">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="14dp"
-                android:text="Remind"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"/>
-            <TextView
-                android:id="@+id/CreatePersonalActivity_RemindTextView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginVertical="12dp"
-                android:text="Off"/>
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginHorizontal="2dp"
-                app:srcCompat="@drawable/ic_keyboard_arrow_right_24"
-                />
+                <LinearLayout
+                    android:id="@+id/CreatePersonalActivity_EndTimeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="13dp"
+                        android:text="End Time"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="14dp"
+                        android:text="@{personalActivity.endTime.toString()}"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="2dp"
+                        app:srcCompat="@drawable/ic_time_24"
+                        />
 
-        </LinearLayout>
+                </LinearLayout>
 
 
-        <com.google.android.material.switchmaterial.SwitchMaterial
-            android:id="@+id/CreatePersonalActivity_RemindAlarmSwitch"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="8dp"
-            android:text="Alarm"/>
 
 
+
+                <LinearLayout
+                    android:id="@+id/CreatePersonalActivity_RepeatLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="13dp"
+                        android:text="Repeat"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/CreatePersonalActivity_RepeatTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="14dp"
+                        android:text="Off"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="2dp"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_right_24"
+                        />
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:id="@+id/CreatePersonalActivity_RemindLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="8dp"
+                    android:orientation="horizontal">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="14dp"
+                        android:text="Remind"/>
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_weight="1"/>
+                    <TextView
+                        android:id="@+id/CreatePersonalActivity_RemindTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginVertical="12dp"
+                        android:text="Off"/>
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginHorizontal="2dp"
+                        app:srcCompat="@drawable/ic_keyboard_arrow_right_24"
+                        />
+
+                </LinearLayout>
+
+
+                <com.google.android.material.switchmaterial.SwitchMaterial
+                    android:id="@+id/CreatePersonalActivity_RemindAlarmSwitch"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="8dp"
+                    android:text="Alarm"/>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
-</com.google.android.material.card.MaterialCardView>
+</layout>
