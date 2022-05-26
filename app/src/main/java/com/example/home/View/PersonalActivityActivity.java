@@ -4,32 +4,37 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.example.home.Model.PersonalActivity;
 import com.example.home.R;
 import com.example.home.Tools.Logger;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.Date;
 
 public class PersonalActivityActivity extends AppCompatActivity {
 
     RecyclerView activityList;
-    ActivityAdapter activityAdapter;
+    PersonalActivityAdapter personalActivityAdapter;
+    FloatingActionButton fab;
 
     private void findViews() {
         activityList = findViewById(R.id.PersonalActivity_RecyclerView);
+        fab = findViewById(R.id.PersonalActivity_FAB);
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_personal_activity);
-        Logger.Debug("","进pa界面了");
         findViews();
         setUpRecyclerView();
-        setClickListeners();
+        setOnClickListeners();
     }
 
     private void setUpRecyclerView() {
@@ -51,12 +56,23 @@ public class PersonalActivityActivity extends AppCompatActivity {
         activities.add(new PersonalActivity("Caterpie", "description", time,time,"null","null"));
         activities.add(new PersonalActivity("Metapod", "description", time,time,"null","null"));
         activities.add(new PersonalActivity("Butterfree", "description", time,time,"null","null"));
-        activityAdapter = new ActivityAdapter(activities);
-        activityList.setAdapter(activityAdapter);
+        personalActivityAdapter = new PersonalActivityAdapter(activities);
+        activityList.setAdapter(personalActivityAdapter);
     }
 
-    private void setClickListeners() {
+    private void setOnClickListeners() {
+        Intent createActivityIntent = new Intent(this, CreateActivityActivity.class);
+        LocalDate localDate = LocalDate.now();
+        LocalDateTime localDateTime = localDate.atStartOfDay();
+        Logger.Debug("","LocalDateTime:" + localDateTime.toString());
+        createActivityIntent.putExtra("date",localDateTime);
 
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(createActivityIntent);
+            }
+        });
     }
 
 }

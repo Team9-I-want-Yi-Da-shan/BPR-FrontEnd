@@ -7,7 +7,6 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.home.R;
-import com.example.home.Tools.Logger;
 import com.google.android.material.card.MaterialCardView;
 
 public class MainActivity extends AppCompatActivity {
@@ -33,15 +32,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         findViews();
-        setClickCardListeners();
-        Logger.Debug("","进main界面了");
+        setOnClickCardListeners();
     }
 
 
-
-
-
-    private void setClickCardListeners(){
+    private void setOnClickCardListeners(){
         Intent personalActivityIntent = new Intent(this, PersonalActivityActivity.class);
         personalActivityCard.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -1,16 +1,32 @@
 package com.example.home.Model;
 
-
-public class PersonalActivity {
+public class PersonalActivityDAO {
     private String title;
     private String description;
-    private String startTime;
-    private String endTime;
+    private long startTime;
+    private long endTime;
     private String reminder;
     private String repeat;
 
+    public PersonalActivityDAO(){}
 
-    public PersonalActivity(String title, String description, String startTime, String endTime, String reminder, String repeat) {
+
+    public PersonalActivityDAO(String title, String description, long startTime, long endTime) {
+        this.title = title;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+    }
+
+    public PersonalActivityDAO(String title, String description, long startTime, long endTime, String reminder) {
+        this.title = title;
+        this.description = description;
+        this.startTime = startTime;
+        this.endTime = endTime;
+        this.reminder = reminder;
+    }
+
+    public PersonalActivityDAO(String title, String description, long startTime, long endTime, String reminder, String repeat) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
@@ -27,11 +43,11 @@ public class PersonalActivity {
         return description;
     }
 
-    public String getStartTime() {
+    public long getStartTime() {
         return startTime;
     }
 
-    public String getEndTime() {
+    public long getEndTime() {
         return endTime;
     }
 
@@ -51,11 +67,11 @@ public class PersonalActivity {
         this.description = description;
     }
 
-    public void setStartTime(String startTime) {
+    public void setStartTime(long startTime) {
         this.startTime = startTime;
     }
 
-    public void setEndTime(String endTime) {
+    public void setEndTime(long endTime) {
         this.endTime = endTime;
     }
 

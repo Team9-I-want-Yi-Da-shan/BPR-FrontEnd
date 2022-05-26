@@ -18,7 +18,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Login_UsernameTextField"
+        android:id="@+id/Login_UsernameTextFieldLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -32,6 +32,7 @@
         app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Login_UsernameTextField"
             android:layout_width="300dp"
             android:layout_height="55dp" />
 
@@ -39,7 +40,7 @@
 
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/Login_PasswordTextField"
+        android:id="@+id/Login_PasswordTextFieldLayout"
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -49,10 +50,11 @@
         app:endIconMode="password_toggle"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_UsernameTextField"
+        app:layout_constraintTop_toBottomOf="@+id/Login_UsernameTextFieldLayout"
         app:startIconDrawable="@drawable/ic_password">
 
         <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/Login_PasswordTextField"
             android:layout_width="300dp"
             android:layout_height="55dp"
             android:inputType="textPassword" />
@@ -67,7 +69,7 @@
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Login_PasswordTextField"
+        app:layout_constraintTop_toBottomOf="@+id/Login_PasswordTextFieldLayout"
         app:lottie_rawRes="@raw/button_login"
         app:lottie_loop="true"
         app:lottie_autoPlay="false" />

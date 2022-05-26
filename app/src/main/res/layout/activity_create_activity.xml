@@ -8,18 +8,21 @@
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:id="@+id/coordinatorLayout"
+        android:id="@+id/CreateActivity_CoordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/topAppBar"
+                android:id="@+id/CreateActivity_TopAppBar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
+                app:layout_anchor="@+id/appBarLayout"
+                app:layout_anchorGravity="center"
                 app:menu="@menu/action_bar_create"
                 app:navigationIcon="@drawable/ic_close_24dp"
                 app:title="@string/create_activity" />
@@ -27,40 +30,36 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <!-- Note: A RecyclerView can also be used -->
-        <androidx.recyclerview.widget.RecyclerView
+        <androidx.core.widget.NestedScrollView
+            android:id="@+id/CreateActivity_NestedScrollView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
             <!-- Scrollable content -->
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/CreateActivity_Card"
-                android:layout_width="130dp"
-                android:layout_height="120dp"
-                android:layout_marginTop="40dp"
-                android:checkable="false"
-                android:clickable="false"
-                android:focusable="true"
-                app:cardCornerRadius="15dp"
-                app:cardElevation="10dp"
-                app:layout_constraintEnd_toStartOf="@+id/Main_PersonalPlan"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/Main_UserGreeting"
-                android:backgroundTint="@color/card">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:id="@+id/CreateActivity_LinearLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                </LinearLayout>
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/CreateActivity_AddCreateActivityCard"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:text="create one more"/>
+            </LinearLayout>
 
 
-            </com.google.android.material.card.MaterialCardView>
+        </androidx.core.widget.NestedScrollView>
 
 
-        </androidx.recyclerview.widget.RecyclerView>
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
-
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

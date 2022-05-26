@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,15 +11,16 @@ import androidx.lifecycle.ViewModelProvider;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.home.R;
 import com.example.home.ViewModel.LoginViewModel;
-import com.google.android.material.textfield.TextInputLayout;
+import com.google.android.material.textfield.TextInputEditText;
 
 
 public class LoginActivity extends AppCompatActivity {
 
     private boolean isLoading;
+    LoginViewModel loginVM;
 
-    private TextInputLayout usernameField;
-    private TextInputLayout passwordField;
+    private TextInputEditText usernameField;
+    private TextInputEditText passwordField;
     private TextView signUpText;
     private LottieAnimationView loginButton;
     private void findViews(){
@@ -38,16 +38,7 @@ public class LoginActivity extends AppCompatActivity {
         findViews();
         setClickListeners();
 
-
-
-        LoginViewModel loginVM = new ViewModelProvider(this).get(LoginViewModel.class);
-
-        signUpText.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                intentToSignUpView();
-            }
-        });
+        loginVM = new ViewModelProvider(this).get(LoginViewModel.class);
 
 //        Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
 //        loginButton.startAnimation(animation);
@@ -80,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     private void setClickListeners(){
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent mainIntent = new Intent(this, MainActivity.class);
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -92,20 +83,23 @@ public class LoginActivity extends AppCompatActivity {
                 loginButton.setAnimation(R.raw.button_loading);
                 loginButton.playAnimation();
 
-                startActivity(intent);
-
-
+                startActivity(mainIntent);
 //                String username = usernameField.toString();
 //                String password = passwordField.toString();
 //                loginVM.login(username,password);
             }
         });
+
+        Intent signUpIntent= new Intent(this, SignUpActivity.class);
+        signUpText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(signUpIntent);
+            }
+        });
+
     }
 
-    public void intentToSignUpView(){
-        Intent intent= new Intent(this, SignUpActivity.class);
-        startActivity(intent);
-    }
 
 
 

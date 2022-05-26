@@ -18,6 +18,7 @@ import retrofit2.internal.EverythingIsNonNull;
 public class LoginViewModel extends ViewModel {
 
 
+
     public void login(String username, String password){
         UserApi userApi = ServiceGenerator.getUserApi();
         Call<UserResponse> call = userApi.login(username, password);

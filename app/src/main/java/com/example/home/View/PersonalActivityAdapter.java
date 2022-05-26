@@ -12,26 +12,25 @@ import com.example.home.R;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
-import java.util.Date;
 
-public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHolder> {
+public class PersonalActivityAdapter extends RecyclerView.Adapter<PersonalActivityAdapter.ViewHolder> {
     private ArrayList<PersonalActivity> personalActivities;
 
-    public ActivityAdapter(ArrayList<PersonalActivity> personalActivities) {
+    public PersonalActivityAdapter(ArrayList<PersonalActivity> personalActivities) {
         this.personalActivities = personalActivities;
     }
 
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View view = inflater.inflate(R.layout.activity_list_item, parent, false);
+        View view = inflater.inflate(R.layout.list_personal_activity_item, parent, false);
         return new ViewHolder(view);
     }
 
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.timeLabel.setText(personalActivities.get(position).getStartTime().toString());
+        viewHolder.timeLabel.setText(personalActivities.get(position).getStartTime());
         viewHolder.title.setText(personalActivities.get(position).getTitle());
         viewHolder.description.setText(personalActivities.get(position).getDescription());
-        String time = personalActivities.get(position).getStartTime().toString() + " - " + personalActivities.get(position).getEndTime().toString();
+        String time = personalActivities.get(position).getStartTime() + " - " + personalActivities.get(position).getEndTime().toString();
         viewHolder.time.setText(time);
     }
 
@@ -55,7 +54,6 @@ public class ActivityAdapter extends RecyclerView.Adapter<ActivityAdapter.ViewHo
             description = itemView.findViewById(R.id.PersonalActivity_Description);
             time = itemView.findViewById(R.id.PersonalActivity_Time);
         }
-
     }
 
 }
