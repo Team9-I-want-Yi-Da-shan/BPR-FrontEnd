@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TimePicker_Card"
+    style="?attr/materialCardViewFilledStyle"
+    android:layout_width="350dp"
+    android:layout_height="480dp"
+    android:layout_margin="30dp"
+    android:layout_gravity="center"
+    android:checkable="false"
+    android:clickable="false"
+    android:focusable="true"
+    app:cardCornerRadius="15dp"
+    app:cardElevation="5dp"
+    app:layout_constraintEnd_toStartOf="@+id/Main_PersonalPlan"
+    app:layout_constraintHorizontal_bias="0.5"
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintTop_toBottomOf="@+id/Main_UserGreeting"
+    android:backgroundTint="@color/white"
+    tools:context=".view.TimePickerFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <ImageButton
+        android:id="@+id/TimePickerFragment_BackButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="10dp"
+        android:background="@color/white"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:srcCompat="@drawable/ic_arrow_back_24" />
+
+    <TextView
+        android:id="@+id/TimePickerFragment_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="35dp"
+        android:text="Title"
+        android:textSize="25dp"/>
+
+    <TimePicker
+        android:id="@+id/TimePickerFragment_TimePicker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:timePickerMode="spinner"
+        android:layout_gravity="center"/>
+
+
+</com.google.android.material.card.MaterialCardView>

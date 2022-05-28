@@ -10,37 +10,28 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.App">
         <activity
-            android:name=".View.CreateActivityActivity"
+            android:name=".view.PlanActivity"
             android:exported="false" />
         <activity
-            android:name=".View.BillActivity"
+            android:name=".view.BillActivity"
             android:exported="false" />
         <activity
-            android:name=".View.SmartHomeActivity"
+            android:name=".view.SmartHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FamilyPlanActivity"
+            android:name=".view.ActivityActivity"
             android:exported="false" />
         <activity
-            android:name=".View.FamilyActivityActivity"
+            android:name=".view.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".View.PersonalPlanActivity"
+            android:name=".view.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".View.PersonalActivityActivity"
+            android:name=".view.SignUpActivity"
             android:exported="false" />
         <activity
-            android:name=".View.MainActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.LoginActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.SignUpActivity"
-            android:exported="false" />
-        <activity
-            android:name=".View.StartActivity"
+            android:name=".view.StartActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
