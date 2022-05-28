@@ -9,13 +9,12 @@
 
 
     <TextView
-        android:id="@+id/Main_UserGreeting"
+        android:id="@+id/Main_username"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="50dp"
         android:layout_marginTop="80dp"
         android:fontFamily="serif"
-        android:text="Hello, User"
         android:textColor="@color/black_100"
         android:textSize="40dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -35,7 +34,7 @@
         app:layout_constraintEnd_toStartOf="@+id/Main_PersonalPlan"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Main_UserGreeting">
+        app:layout_constraintTop_toBottomOf="@+id/Main_username">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -78,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/Main_PersonalActivity"
-        app:layout_constraintTop_toBottomOf="@+id/Main_UserGreeting">
+        app:layout_constraintTop_toBottomOf="@+id/Main_username">
 
         <LinearLayout
             android:layout_width="match_parent"

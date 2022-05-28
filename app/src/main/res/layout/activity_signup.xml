@@ -24,8 +24,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SignUp_NameEditTextField"
             android:layout_width="300dp"
-            android:layout_height="55dp"
-            android:inputType="textPassword" />
+            android:layout_height="55dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -46,8 +45,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/SignUp_EmailEditTextField"
             android:layout_width="300dp"
-            android:layout_height="55dp"
-            android:inputType="textPassword" />
+            android:layout_height="55dp" />
 
     </com.google.android.material.textfield.TextInputLayout>
 

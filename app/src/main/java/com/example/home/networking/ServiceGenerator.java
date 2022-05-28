@@ -11,7 +11,7 @@ public class ServiceGenerator {
     public static UserApi getUserApi() {
         if (userApi == null) {
             userApi = new Retrofit.Builder()
-                    .baseUrl("")
+                    .baseUrl("http://192.168.1.20:9000/v1/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(UserApi.class);
@@ -29,4 +29,5 @@ public class ServiceGenerator {
         }
         return activityApi;
     }
+
 }
