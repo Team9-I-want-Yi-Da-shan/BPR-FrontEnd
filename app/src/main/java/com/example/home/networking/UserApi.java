@@ -18,20 +18,6 @@ public interface UserApi {
     Call<SignUpResponse> signUp(@Body User user);
 
 
-    @POST("plan/addPersonPlan")
-    Call<AddPersonPlanResponse> addPersonalPlan(@Body PersonalPlan plan);
-
-    @POST("plan/getPersonalPlanByPlanID")
-    Call<GetPersonalPlanByPlanIDResponse> getPersonalPlanByPlanID(@Path("id") int id);
-
-    @PUT("plan/updatePersonalPlan")
-    Call<UpdatePersonalPlanResponse> updatePersonalPlan(@Path("id") int plan_id,@Body PersonalPlan plan);
-
-    @DELETE("plan/RemovePersonalPlanByPlanID")
-    Call<RemovePersonalPlanByPlanID> removePersonalPlanByPlanID(@Path("id") int id);
-
-    @POST("plan/getPersonPlanListByPersonID")
-    Call<GetPersonPlanListByPersonIDResponse> getPersonPlanListByPersonID(@Path("id") int id);
 
 
 }

@@ -3,6 +3,28 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/activity_activity.xml" value="0.1" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/activity_login.xml" value="0.1" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/activity_main.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/activity_plan.xml" value="0.1" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/activity_start.xml" value="0.1" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_create_family_activity.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_create_family_plan.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_create_personal_activity.xml" value="0.4" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_create_personal_plan.xml" value="0.176" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_family_activity.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_family_plan.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_personal_activity.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/fragment_personal_plan.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/list_family_activity_item.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/list_family_plan_item.xml" value="0.2" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/list_personal_activity_item.xml" value="0.19519927536231885" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/layout/list_personal_plan_item.xml" value="0.2" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/menu/action_bar_activities.xml" value="0.23802083333333332" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/menu/action_bar_create.xml" value="0.23802083333333332" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/menu/action_bar_plans.xml" value="0.1952991452991453" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/menu/bottom_activity_navigation_menu.xml" value="0.23802083333333332" />
+        <entry key="..\:/BRP/BPR-FrontEnd/app/src/main/res/menu/bottom_plan_navigation_menu.xml" value="0.23802083333333332" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.5235" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/home_logo_background.xml" value="0.407" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_bill.xml" value="0.4885" />

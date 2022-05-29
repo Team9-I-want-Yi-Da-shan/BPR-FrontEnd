@@ -5,14 +5,15 @@ import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class PersonalPlan {
+public class FamilyPlan {
+
     @SerializedName("name")
     @Expose
     private String name;
 
-    @SerializedName("user_id")
+    @SerializedName("person_id")
     @Expose
-    private int user_id;
+    private int person_id;
 
     @SerializedName("description")
     @Expose
@@ -29,23 +30,23 @@ public class PersonalPlan {
 
     @SerializedName("data")
     @Expose
-    private List<PersonalPlan>data = null;
+    private List<PersonalPlan> data = null;
 
-    public PersonalPlan(String name, int user_id, String description, String comment) {
+    public FamilyPlan(String name, int person_id, String description, String comment) {
         this.name = name;
-        this.user_id = user_id;
+        this.person_id = person_id;
         this.description = description;
         this.comment = comment;
     }
 
-    public PersonalPlan(String name, String description, String comment) {
+    public FamilyPlan(String name, String description, String comment) {
         this.name = name;
         this.description = description;
         this.comment = comment;
     }
-    public PersonalPlan(int plan_id, String name, int user_id, String description, String comment) {
+    public FamilyPlan(int plan_id, String name, int person_id, String description, String comment) {
         this.name = name;
-        this.user_id = user_id;
+        this.person_id = person_id;
         this.description = description;
         this.comment = comment;
         this.plan_id = plan_id;
@@ -59,12 +60,12 @@ public class PersonalPlan {
         this.name = name;
     }
 
-    public int getUser_id() {
-        return user_id;
+    public int getPerson_id() {
+        return person_id;
     }
 
-    public void setUser_id(int user_id) {
-        this.user_id = user_id;
+    public void setPerson_id(int person_id) {
+        this.person_id = person_id;
     }
 
     public String getDescription() {

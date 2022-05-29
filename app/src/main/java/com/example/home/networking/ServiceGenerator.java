@@ -7,6 +7,7 @@ public class ServiceGenerator {
 
     private static UserApi userApi;
     private static ActivityApi activityApi;
+    private static PlanApi planApi;
 
     public static UserApi getUserApi() {
         if (userApi == null) {
@@ -28,6 +29,17 @@ public class ServiceGenerator {
                     .create(ActivityApi.class);
         }
         return activityApi;
+    }
+
+    public static PlanApi getPlanApi() {
+        if (planApi == null) {
+            planApi = new Retrofit.Builder()
+                    .baseUrl("http://192.168.1.20:9000/v1/")
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .build()
+                    .create(PlanApi.class);
+        }
+        return planApi;
     }
 
 }
