@@ -27,9 +27,9 @@ public class PersonalPlan {
     @Expose
     private int plan_id;
 
-    @SerializedName("data")
+    @SerializedName("results")
     @Expose
-    private List<PersonalPlan>data = null;
+    private List<PersonalPlan> results = null;
 
     public PersonalPlan(String name, int user_id, String description, String comment) {
         this.name = name;
@@ -42,6 +42,11 @@ public class PersonalPlan {
         this.name = name;
         this.description = description;
         this.comment = comment;
+    }
+
+    public PersonalPlan(int plan_id){
+        this.plan_id = plan_id;
+
     }
     public PersonalPlan(int plan_id, String name, int user_id, String description, String comment) {
         this.name = name;
@@ -92,10 +97,10 @@ public class PersonalPlan {
     }
 
     public List<PersonalPlan> getPlanList() {
-        return data;
+        return results;
     }
 
     public void setPlanList(List<PersonalPlan> planList) {
-        this.data = planList;
+        this.results = planList;
     }
 }

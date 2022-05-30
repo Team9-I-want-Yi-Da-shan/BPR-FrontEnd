@@ -57,7 +57,7 @@
         android:layout_marginTop="16dp"
         app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/Activity_BottomNavigation"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/Activity_DateTextView" />
 
 
 

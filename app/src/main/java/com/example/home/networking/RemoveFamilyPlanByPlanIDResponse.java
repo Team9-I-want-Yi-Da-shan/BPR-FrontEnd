@@ -2,12 +2,13 @@ package com.example.home.networking;
 
 import com.google.gson.annotations.SerializedName;
 
-public class RemovePersonalPlanByPlanID {
+public class RemoveFamilyPlanByPlanIDResponse {
+
 
     @SerializedName("message")
     private String message;
 
-    public RemovePersonalPlanByPlanID(String message) {
+    public RemoveFamilyPlanByPlanIDResponse(String message) {
         this.message = message;
     }
 

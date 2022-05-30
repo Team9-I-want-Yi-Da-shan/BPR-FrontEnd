@@ -7,19 +7,18 @@ import java.util.List;
 
 public class GetPersonPlanListByPersonIDResponse {
 
-    @SerializedName("data")
-    private List<PersonalPlan>data;
-
+    @SerializedName("results")
+    private List<PersonalPlan>results;
 
     public GetPersonPlanListByPersonIDResponse(List<PersonalPlan> data) {
-        this.data = data;
+        this.results = results;
     }
 
-    public List<PersonalPlan> getData() {
-        return data;
+    public List<PersonalPlan> getResults() {
+        return results;
     }
 
-    public void setData(List<PersonalPlan> data) {
-        this.data = data;
+    public void setResults(List<PersonalPlan> results) {
+        this.results = results;
     }
 }

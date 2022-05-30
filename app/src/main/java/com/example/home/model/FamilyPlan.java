@@ -11,9 +11,9 @@ public class FamilyPlan {
     @Expose
     private String name;
 
-    @SerializedName("person_id")
+    @SerializedName("family_id")
     @Expose
-    private int person_id;
+    private int family_id;
 
     @SerializedName("description")
     @Expose
@@ -32,11 +32,11 @@ public class FamilyPlan {
     @Expose
     private List<PersonalPlan> data = null;
 
-    public FamilyPlan(String name, int person_id, String description, String comment) {
+    public FamilyPlan(String name, int family_id, String description, String comment) {
         this.name = name;
-        this.person_id = person_id;
         this.description = description;
         this.comment = comment;
+        this.family_id = family_id;
     }
 
     public FamilyPlan(String name, String description, String comment) {
@@ -44,12 +44,16 @@ public class FamilyPlan {
         this.description = description;
         this.comment = comment;
     }
-    public FamilyPlan(int plan_id, String name, int person_id, String description, String comment) {
+    public FamilyPlan(int plan_id, String name, int family_id, String description, String comment) {
         this.name = name;
-        this.person_id = person_id;
         this.description = description;
         this.comment = comment;
         this.plan_id = plan_id;
+        this.family_id = family_id;
+    }
+
+    public FamilyPlan(int family_id) {
+        this.family_id = family_id;
     }
 
     public String getName() {
@@ -60,13 +64,7 @@ public class FamilyPlan {
         this.name = name;
     }
 
-    public int getPerson_id() {
-        return person_id;
-    }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
-    }
 
     public String getDescription() {
         return description;
@@ -99,4 +97,8 @@ public class FamilyPlan {
     public void setPlanList(List<PersonalPlan> planList) {
         this.data = planList;
     }
+
+    public int getFamily_id() {return family_id;}
+
+    public void setFamily_id(int family_id) {this.family_id = family_id;}
 }
