@@ -1,5 +1,6 @@
 package com.example.home.view;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -20,7 +21,6 @@ import com.example.home.viewModel.ActivityViewModel;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.ArrayList;
 
 public class PersonalActivityFragment extends Fragment {
@@ -34,6 +34,7 @@ public class PersonalActivityFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 
+    ActivityActivity activity;
     ActivityViewModel viewModel;
 
     RecyclerView personalActivityRecyclerView;
@@ -67,6 +68,7 @@ public class PersonalActivityFragment extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        activity = (ActivityActivity)getActivity();
         viewModel = new ViewModelProvider(getActivity()).get(ActivityViewModel.class);
     }
 
@@ -82,28 +84,46 @@ public class PersonalActivityFragment extends Fragment {
 
         personalActivityRecyclerView = getView().findViewById(R.id.PersonalActivity_RecyclerView);
         setUpRecyclerView();
+
+        viewModel.getDateSelected().observe(activity, new Observer<LocalDate>() {
+            @Override
+            public void onChanged(LocalDate localDate) {
+                if(viewModel.getBottomNavigationSelectedItem().getValue()==0){
+                    personalActivityAdapter.setPersonalActivities(viewModel.getPersonalActivities());
+                }
+            }
+        });
+        viewModel.getBottomNavigationSelectedItem().observe(activity, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer == 0){
+                    personalActivityAdapter.setPersonalActivities(viewModel.getPersonalActivities());
+                }
+            }
+        });
     }
 
     private void setUpRecyclerView() {
         personalActivityRecyclerView.hasFixedSize();
         personalActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayList<PersonalActivity> activities = new ArrayList<>();
-        LocalDateTime time = LocalDateTime.now();
-
-        activities.add(new PersonalActivity("Bulbasaur", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Ivysaur", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Venusaur", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Charmander", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Charmeleon", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Charizard", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Squirtle", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Wartortle", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Blastoise", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Caterpie", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Metapod", "description", time,time,0,0));
-        activities.add(new PersonalActivity("Butterfree", "description", time,time,0,0));
-        personalActivityAdapter = new PersonalActivityAdapter(activities);
+//        ArrayList<PersonalActivity> activities = new ArrayList<>();
+//        LocalDateTime time = LocalDateTime.now();
+//
+//        activities.add(new PersonalActivity("Bulbasaur", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Ivysaur", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Venusaur", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Charmander", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Charmeleon", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Charizard", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Squirtle", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Wartortle", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Blastoise", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Caterpie", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Metapod", "description", time,time,0,0));
+//        activities.add(new PersonalActivity("Butterfree", "description", time,time,0,0));
+        personalActivityAdapter = new PersonalActivityAdapter();
+        personalActivityAdapter.setPersonalActivities(viewModel.getPersonalActivities());
         personalActivityRecyclerView.setAdapter(personalActivityAdapter);
     }
 

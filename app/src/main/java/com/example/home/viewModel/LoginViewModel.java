@@ -1,6 +1,6 @@
 package com.example.home.viewModel;
 
-import android.util.Log;
+import android.text.TextUtils;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -20,8 +20,20 @@ import retrofit2.internal.EverythingIsNonNull;
 public class LoginViewModel extends ViewModel {
 
 
-    MutableLiveData<Boolean> isLoggedin = new MutableLiveData<>();
-    private String JsonResponseUsername;
+    MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<>();
+    private User user;
+
+
+    public String validateAndLogin(String email, String password) {
+        if (TextUtils.isEmpty(email)){
+            return "Please enter email";
+        }else if (TextUtils.isEmpty(password)){
+            return "Please enter password";
+        } else {
+            login(email, password);
+            return "ok";
+        }
+    }
 
     public void login(String email, String password){
         UserApi userApi = ServiceGenerator.getUserApi();
@@ -32,25 +44,25 @@ public class LoginViewModel extends ViewModel {
             @Override
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
-                    JsonResponseUsername = response.body().getUser().getUsername();
-                    Log.d("Username",JsonResponseUsername);
-                    isLoggedin.setValue(true);
+                    user = response.body().getUser();
+                    isLoggedIn.setValue(true);
                 }
             }
             @EverythingIsNonNull
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
                 Logger.debug("Retrofit", "Something went wrong :(");
-                isLoggedin.setValue(false);
+                isLoggedIn.setValue(false);
             }
         });
     }
 
-    public LiveData<Boolean> getisLoggedin()
+    public LiveData<Boolean> getIsLoggedIn()
     {
-        return isLoggedin;
+        return isLoggedIn;
     }
 
-    public String getJsonResponseUsername(){return JsonResponseUsername;}
+    public User getResponseUser(){return user;}
+
 
 }

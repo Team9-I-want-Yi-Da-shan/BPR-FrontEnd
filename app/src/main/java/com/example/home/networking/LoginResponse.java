@@ -3,8 +3,6 @@ package com.example.home.networking;
 import com.example.home.model.User;
 import com.google.gson.annotations.SerializedName;
 
-import java.util.List;
-
 public class LoginResponse {
     @SerializedName("message")
     private String message;

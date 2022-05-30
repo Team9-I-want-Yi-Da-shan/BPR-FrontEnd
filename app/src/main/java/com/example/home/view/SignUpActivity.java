@@ -2,12 +2,9 @@ package com.example.home.view;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,8 +18,8 @@ import com.google.android.material.textfield.TextInputEditText;
 public class SignUpActivity extends AppCompatActivity {
 
     private TextInputEditText usernameText;
-    private TextInputEditText passwordText;
     private TextInputEditText emailText;
+    private TextInputEditText passwordText;
     private TextInputEditText passwordConfirmText;
     private Button signUpButton;
     private ImageView backToLogin;
@@ -36,14 +33,13 @@ public class SignUpActivity extends AppCompatActivity {
         signUpVM = new ViewModelProvider(this).get(SignUpViewModel.class);
 
         usernameText = findViewById(R.id.SignUp_NameEditTextField);
-        passwordText = findViewById(R.id.SignUp_PasswordTextEditField);
         emailText = findViewById(R.id.SignUp_EmailEditTextField);
+        passwordText = findViewById(R.id.SignUp_PasswordTextEditField);
         passwordConfirmText = findViewById(R.id.SignUp_confirmPasswordEditTextField);
         signUpButton = findViewById(R.id.SignUpButton);
         backToLogin = findViewById(R.id.backToLogin);
 
         setOnClickListener();
-        setEditTextListener();
     }
 
 
@@ -53,71 +49,45 @@ public class SignUpActivity extends AppCompatActivity {
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String result = signUpVM.validate();
+                String username = usernameText.getText().toString();
+                String email = emailText.getText().toString();
+                String password = passwordText.getText().toString();
+                String passwordConfirm = passwordConfirmText .getText().toString();
+                String result = signUpVM.validateAndSignUp(username,email,password,passwordConfirm);
                 if(!result.equals("ok")){
                     makeToast(result);
                 }
             }
         });
 
-        Intent intent= new Intent(this, LoginActivity.class);
+
         backToLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(intent);
+                finish();
             }
         });
 
         signUpVM.getisAccountCreated().observe(this, new Observer<Boolean>() {
             @Override
             public void onChanged(Boolean aBoolean) {
+                usernameText.setText("");
                 emailText.setText("");
                 passwordText.setText("");
                 passwordConfirmText.setText("");
-                usernameText.setText("");
                 if (aBoolean == true) {
-                    Toast.makeText(getApplicationContext(), "Account was created!", Toast.LENGTH_SHORT).show();
-                    startActivity(intent);
+                    makeToast("Account was created!");
+                    finish();
                 } else {
-                    Toast.makeText(getApplicationContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
+                    makeToast("Something went wrong.");
                 }
             }
         });
     }
 
-    private void setEditTextListener() {
-        usernameText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    signUpVM.setUsername(usernameText.getText().toString());
-                }
-            }
-        });
-        passwordText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    signUpVM.setPassword(passwordText.getText().toString());
-                }
-            }
-        });
-        emailText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    signUpVM.setEmail(emailText.getText().toString());
-                }
-            }
-        });
-        passwordConfirmText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    signUpVM.setPasswordConfirm(passwordConfirmText.getText().toString());
-                }
-            }
-        });
+    private void startLoginActivity(){
+        Intent intent= new Intent(this, LoginActivity.class);
+        startActivity(intent);
     }
 
     private void makeToast(String message){

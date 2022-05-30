@@ -8,36 +8,63 @@
     tools:context=".view.ActivityActivity">
 
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/Activity_BarLayout"
+    <ImageButton
+        android:id="@+id/Activity_BackToMain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="8dp"
+        android:background="@color/white"
+        android:minWidth="48dp"
+        android:minHeight="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_arrow_back_24" />
+
+    <TextView
+        android:id="@+id/Activity_DateTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Activity"
+        android:textSize="24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/Activity_Calendar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="start"
+        android:layout_margin="12dp"
+        android:background="@color/white"
+        android:minWidth="40dp"
+        android:minHeight="40dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_calendar_month_40" />
+
+    <com.google.android.material.divider.MaterialDivider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent">
-
-        <com.google.android.material.appbar.MaterialToolbar
-            android:id="@+id/Activity_TopAppBar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            app:menu="@menu/action_bar_activities"
-            app:navigationIcon="@drawable/ic_arrow_back_24"
-            app:title="no title" />
-
-    </com.google.android.material.appbar.AppBarLayout>
+        app:layout_constraintBottom_toTopOf="@+id/Activity_ActivityFrameLayout" />
 
     <FrameLayout
         android:id="@+id/Activity_ActivityFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_marginTop="16dp"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toTopOf="@+id/Activity_BottomNavigation"
-        app:layout_constraintTop_toBottomOf="@+id/Activity_BarLayout"
-        app:layout_constrainedHeight="true"/>
+        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/Activity_BottomNavigation"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="60dp"
         android:layout_gravity="bottom"
         app:layout_constraintBottom_toBottomOf="parent"
         app:menu="@menu/bottom_activity_navigation_menu" />

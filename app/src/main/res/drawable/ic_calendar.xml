@@ -1,14 +1,14 @@
 <vector android:height="50dp" android:viewportHeight="16"
     android:viewportWidth="16" android:width="50dp" xmlns:android="http://schemas.android.com/apk/res/android">
-    <path android:fillColor="#FFFFFFFF" android:pathData="M14,1h-0.5a0.5,0.5 0,0 0,-1 0h-4a0.5,0.5 0,0 0,-1 0h-4a0.5,0.5 0,0 0,-1 0H2A2.0023,2.0023 0,0 0,0 3V14a2.0023,2.0023 0,0 0,2 2H14a2.0023,2.0023 0,0 0,2 -2V3A2.0023,2.0023 0,0 0,14 1ZM1,3A1,1 0,0 1,2 2h0.5V3a0.5,0.5 0,0 0,1 0V2h4V3a0.5,0.5 0,0 0,1 0V2h4V3a0.5,0.5 0,0 0,1 0V2H14a1,1 0,0 1,1 1V4.5H1ZM15,14a1,1 0,0 1,-1 1H2a1,1 0,0 1,-1 -1V5.5H15Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M3,12.5H4a0.5,0.5 0,0 0,0 -1H3a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M6,12.5H7a0.5,0.5 0,0 0,0 -1H6a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M9,12.5h1a0.5,0.5 0,0 0,0 -1H9a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M3,10.5H4a0.5,0.5 0,0 0,0 -1H3a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M6,10.5H7a0.5,0.5 0,0 0,0 -1H6a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M9,10.5h1a0.5,0.5 0,0 0,0 -1H9a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M12,10.5h1a0.5,0.5 0,0 0,0 -1H12a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M6,8.5H7a0.5,0.5 0,0 0,0 -1H6a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M9,8.5h1a0.5,0.5 0,0 0,0 -1H9a0.5,0.5 0,0 0,0 1Z"/>
-    <path android:fillColor="#FFFFFFFF" android:pathData="M12,8.5h1a0.5,0.5 0,0 0,0 -1H12a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M14,1h-0.5a0.5,0.5 0,0 0,-1 0h-4a0.5,0.5 0,0 0,-1 0h-4a0.5,0.5 0,0 0,-1 0H2A2.0023,2.0023 0,0 0,0 3V14a2.0023,2.0023 0,0 0,2 2H14a2.0023,2.0023 0,0 0,2 -2V3A2.0023,2.0023 0,0 0,14 1ZM1,3A1,1 0,0 1,2 2h0.5V3a0.5,0.5 0,0 0,1 0V2h4V3a0.5,0.5 0,0 0,1 0V2h4V3a0.5,0.5 0,0 0,1 0V2H14a1,1 0,0 1,1 1V4.5H1ZM15,14a1,1 0,0 1,-1 1H2a1,1 0,0 1,-1 -1V5.5H15Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M3,12.5H4a0.5,0.5 0,0 0,0 -1H3a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M6,12.5H7a0.5,0.5 0,0 0,0 -1H6a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M9,12.5h1a0.5,0.5 0,0 0,0 -1H9a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M3,10.5H4a0.5,0.5 0,0 0,0 -1H3a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M6,10.5H7a0.5,0.5 0,0 0,0 -1H6a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M9,10.5h1a0.5,0.5 0,0 0,0 -1H9a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M12,10.5h1a0.5,0.5 0,0 0,0 -1H12a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M6,8.5H7a0.5,0.5 0,0 0,0 -1H6a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M9,8.5h1a0.5,0.5 0,0 0,0 -1H9a0.5,0.5 0,0 0,0 1Z"/>
+    <path android:fillColor="#FF000000" android:pathData="M12,8.5h1a0.5,0.5 0,0 0,0 -1H12a0.5,0.5 0,0 0,0 1Z"/>
 </vector>

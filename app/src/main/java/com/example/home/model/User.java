@@ -3,11 +3,13 @@ package com.example.home.model;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class User {
+import java.io.Serializable;
 
-    @SerializedName("id")
+public class User implements Serializable {
+
+    @SerializedName("user_id")
     @Expose
-    private int id;
+    private int userId;
 
     @SerializedName("name")
     @Expose
@@ -21,8 +23,19 @@ public class User {
     @Expose
     private String password;
 
-    public User(String username,String email, String password){
-        this.name = username;
+    @SerializedName("family_id")
+    @Expose
+    private int familyId;
+
+    public User(int userId, String name, String email, int familyId) {
+        this.userId = userId;
+        this.name = name;
+        this.email = email;
+        this.familyId = familyId;
+    }
+
+    public User(String name, String email, String password){
+        this.name = name;
         this.email = email;
         this.password = password;
     }
@@ -32,11 +45,20 @@ public class User {
         this.password = password;
     }
 
-    public String getUsername() {
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public String getName() {
         return name;
     }
 
-    public void setUsername(String username) {
+    public void setName(String username) {
         this.name = username;
     }
 
@@ -56,10 +78,18 @@ public class User {
         this.password = password;
     }
 
+    public int getFamilyId() {
+        return familyId;
+    }
+
+    public void setFamilyId(int familyId) {
+        this.familyId = familyId;
+    }
+
     @Override
     public String toString() {
         return "User{" +
-                "userId=" + id +
+                "userId=" + userId +
                 ", username='" + name + '\'' +
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +

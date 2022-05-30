@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ManageFamilyFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/ManageFamily_Card"
+        style="?attr/materialCardViewFilledStyle"
+        android:layout_width="340dp"
+        android:layout_height="550dp"
+        android:layout_margin="30dp"
+        android:layout_gravity="center"
+        android:checkable="false"
+        android:clickable="false"
+        android:focusable="true"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="5dp"
+        android:backgroundTint="@color/white">
+
+        <ImageButton
+            android:id="@+id/ManageFamily_CloseCard"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_margin="20dp"
+            app:srcCompat="@drawable/ic_close_24dp"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/ManageFamily_ManageFamilyTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_margin="20dp"
+            android:text="Manage"
+            android:textColor="@color/blue_link"
+            />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="50dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:text="Your Family"
+                android:textSize="28dp"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/ManageFamily_RecyclerView"
+                android:layout_width="match_parent"
+                android:layout_height="430dp"
+                android:layout_marginTop="10dp"/>
+
+        </LinearLayout>
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+</FrameLayout>

@@ -16,11 +16,12 @@ import java.util.ArrayList;
 
 public class FamilyActivityAdapter extends RecyclerView.Adapter<FamilyActivityAdapter.ViewHolder>{
 
-
     private ArrayList<FamilyActivity> personalActivities;
 
-    public FamilyActivityAdapter(ArrayList<FamilyActivity> personalActivities) {
-        this.personalActivities = personalActivities;
+    public FamilyActivityAdapter() { }
+
+    public void setFamilyActivities(ArrayList<FamilyActivity> familyActivities) {
+        this.personalActivities = familyActivities;
     }
 
     @NonNull

@@ -5,24 +5,23 @@ import android.text.TextUtils;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.example.home.model.FamilyActivity;
+import com.example.home.model.PersonalActivity;
 import com.example.home.model.PersonalActivityDAO;
 import com.example.home.networking.ActivityApi;
-import com.example.home.networking.CreatePersonalActivityResponse;
 import com.example.home.networking.ServiceGenerator;
-import com.example.home.tool.Logger;
+
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.internal.EverythingIsNonNull;
 
 public class ActivityViewModel extends ViewModel {
 
-    LocalDate dateSelected;
+    MutableLiveData<LocalDate> dateSelected;
+    MutableLiveData<Integer> bottomNavigationSelectedItem;
 
     MutableLiveData<String> mPATitle;
     MutableLiveData<String> mPADescription;
@@ -36,8 +35,10 @@ public class ActivityViewModel extends ViewModel {
     ActivityApi activityApi;
 
     public ActivityViewModel(){
-        dateSelected = LocalDate.now();
-//        activityApi = ServiceGenerator.getActivityApi();
+        dateSelected = new MutableLiveData<>();
+        dateSelected.setValue(LocalDate.now());
+        bottomNavigationSelectedItem = new MutableLiveData<>();
+        bottomNavigationSelectedItem.setValue(0);
 
         mPATitle = new MutableLiveData<>();
         mPADescription = new MutableLiveData<>();
@@ -49,6 +50,10 @@ public class ActivityViewModel extends ViewModel {
         mPARemind.setValue(-1);
         mPARepeat.setValue(-1);
         mPAAlarm.setValue(false);
+
+
+        activityApi = ServiceGenerator.getActivityApi();
+
     }
 
 
@@ -113,13 +118,30 @@ public class ActivityViewModel extends ViewModel {
         return personalActivityDAO;
     }
 
+    public ArrayList<PersonalActivity> getPersonalActivities(){
+        return new ArrayList<PersonalActivity>();
+    }
 
-    public LocalDate getDateSelected() {
+    public ArrayList<FamilyActivity> getFamilyActivities() {
+        return new ArrayList<FamilyActivity>();
+    }
+
+
+
+    public MutableLiveData<LocalDate> getDateSelected() {
         return dateSelected;
     }
 
     public void setDateSelected(LocalDate dateSelected) {
-        this.dateSelected = dateSelected;
+        this.dateSelected.setValue(dateSelected);
+    }
+
+    public MutableLiveData<Integer> getBottomNavigationSelectedItem() {
+        return bottomNavigationSelectedItem;
+    }
+
+    public void setBottomNavigationSelectedItem(MutableLiveData<Integer> bottomNavigationSelectedItem) {
+        this.bottomNavigationSelectedItem = bottomNavigationSelectedItem;
     }
 
     public MutableLiveData<String> getmPATitle() {
@@ -169,4 +191,6 @@ public class ActivityViewModel extends ViewModel {
     public void setmPARepeat(Integer repeat) {
         this.mPARepeat.setValue(repeat);
     }
+
+
 }

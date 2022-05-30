@@ -199,11 +199,9 @@ public class CreatePersonalActivityFragment extends Fragment {
     }
 
     private void setLiveDataOnChangeObservers() {
-        Logger.debug("stq","设置开始时间监听cpa");
         viewModel.getmPAStartTime().observe(parentActivity, new Observer<LocalDateTime>() {
             @Override
             public void onChanged(LocalDateTime localDateTime) {
-                Logger.debug("stq","监听到了开始时间变化cpa");
                 int hour = localDateTime.getHour();
                 int minute = localDateTime.getMinute();
                 startTimeTextView.setText(hour+":"+minute);
@@ -212,7 +210,6 @@ public class CreatePersonalActivityFragment extends Fragment {
         viewModel.getmPAEndTime().observe(parentActivity, new Observer<LocalDateTime>() {
             @Override
             public void onChanged(LocalDateTime localDateTime) {
-                Logger.debug("stq","监听到了结束时间变化cpa");
                 int hour = localDateTime.getHour();
                 int minute = localDateTime.getMinute();
                 endTimeTextView.setText(hour+":"+minute);
