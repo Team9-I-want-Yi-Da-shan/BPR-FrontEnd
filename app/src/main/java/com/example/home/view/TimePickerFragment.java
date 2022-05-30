@@ -114,7 +114,7 @@ public class TimePickerFragment extends Fragment {
             public void onClick(View view) {
                 int hour = timePicker.getHour();
                 int minute = timePicker.getMinute();
-                LocalDate localDate = viewModel.getDateSelected();
+                LocalDate localDate = viewModel.getDateSelected().getValue();
                 LocalDateTime localDateTime = LocalDateTime.of(localDate, LocalTime.of(hour,minute));
                 ActivityActivity activity = (ActivityActivity)getActivity();
 

@@ -1,5 +1,6 @@
 package com.example.home.view;
 
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import com.example.home.R;
 import com.example.home.model.FamilyActivity;
 import com.example.home.viewModel.ActivityViewModel;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class FamilyActivityFragment extends Fragment {
@@ -31,6 +33,7 @@ public class FamilyActivityFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 
+    ActivityActivity activity;
     ActivityViewModel viewModel;
 
     RecyclerView familyActivityRecyclerView;
@@ -64,6 +67,7 @@ public class FamilyActivityFragment extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        activity = (ActivityActivity) getActivity();
         viewModel = new ViewModelProvider(getActivity()).get(ActivityViewModel.class);
     }
 
@@ -79,20 +83,38 @@ public class FamilyActivityFragment extends Fragment {
 
         familyActivityRecyclerView = getView().findViewById(R.id.FamilyActivity_RecyclerView);
         setUpRecyclerView();
+
+        viewModel.getDateSelected().observe(activity, new Observer<LocalDate>() {
+            @Override
+            public void onChanged(LocalDate localDate) {
+                if(viewModel.getBottomNavigationSelectedItem().getValue()==1){
+                    familyActivityAdapter.setFamilyActivities(viewModel.getFamilyActivities());
+                }
+            }
+        });
+        viewModel.getBottomNavigationSelectedItem().observe(activity, new Observer<Integer>() {
+            @Override
+            public void onChanged(Integer integer) {
+                if(integer == 1){
+                    familyActivityAdapter.setFamilyActivities(viewModel.getFamilyActivities());
+                }
+            }
+        });
     }
 
     private void setUpRecyclerView() {
         familyActivityRecyclerView.hasFixedSize();
         familyActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayList<FamilyActivity> activities = new ArrayList<>();
-        String time = "17:00";
-
-        activities.add(new FamilyActivity("chifan", "description", time,time,"null","null"));
-        activities.add(new FamilyActivity("shuijiao", "description", time,time,"null","null"));
-        activities.add(new FamilyActivity("dadodo", "description", time,time,"null","null"));
-        activities.add(new FamilyActivity("zuoai", "description", time,time,"null","null"));
-        familyActivityAdapter = new FamilyActivityAdapter(activities);
+//        ArrayList<FamilyActivity> activities = new ArrayList<>();
+//        String time = "17:00";
+//
+//        activities.add(new FamilyActivity("chifan", "description", time,time,"null","null"));
+//        activities.add(new FamilyActivity("shuijiao", "description", time,time,"null","null"));
+//        activities.add(new FamilyActivity("dadodo", "description", time,time,"null","null"));
+//        activities.add(new FamilyActivity("zuoai", "description", time,time,"null","null"));
+        familyActivityAdapter = new FamilyActivityAdapter();
+        familyActivityAdapter.setFamilyActivities(viewModel.getFamilyActivities());
         familyActivityRecyclerView.setAdapter(familyActivityAdapter);
     }
 

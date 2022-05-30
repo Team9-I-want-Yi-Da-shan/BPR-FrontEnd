@@ -16,7 +16,9 @@ import java.util.ArrayList;
 public class PersonalActivityAdapter extends RecyclerView.Adapter<PersonalActivityAdapter.ViewHolder> {
     private ArrayList<PersonalActivity> personalActivities;
 
-    public PersonalActivityAdapter(ArrayList<PersonalActivity> personalActivities) {
+    public PersonalActivityAdapter() { }
+
+    public void setPersonalActivities(ArrayList<PersonalActivity> personalActivities){
         this.personalActivities = personalActivities;
     }
 

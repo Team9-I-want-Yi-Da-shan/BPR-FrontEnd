@@ -2,19 +2,31 @@ package com.example.home.view;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.example.home.R;
 import com.example.home.viewModel.ActivityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
+
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
 
 public class ActivityActivity extends AppCompatActivity {
 
@@ -22,12 +34,21 @@ public class ActivityActivity extends AppCompatActivity {
     FragmentManager fragmentManager;
 
     FrameLayout createActivityFrameLayout;
+
+    ImageButton backButton;
+    ImageButton calendarButton;
+    TextView dateTextView;
     FloatingActionButton fab;
     BottomNavigationView bottomNavigationView;
 
-    CreatePersonalActivityFragment createPersonalActivityFragment;
-    TimePickerFragment timePickerFragment;
+    MaterialDatePicker datePicker;
 
+    PersonalActivityFragment personalActivityFragment;
+    FamilyActivityFragment familyActivityFragment;
+
+    CreatePersonalActivityFragment createPersonalActivityFragment;
+    CreateFamilyActivityFragment createFamilyActivityFragment;
+    TimePickerFragment timePickerFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,17 +56,33 @@ public class ActivityActivity extends AppCompatActivity {
         setContentView(R.layout.activity_activity);
         viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
 
+        personalActivityFragment = PersonalActivityFragment.newInstance();
+        familyActivityFragment = FamilyActivityFragment.newInstance();
         createPersonalActivityFragment = CreatePersonalActivityFragment.newInstance();
+        createFamilyActivityFragment = CreateFamilyActivityFragment.newInstance();
 
         createActivityFrameLayout = findViewById(R.id.Activity_CreateActivityFrameLayout);
+        backButton = findViewById(R.id.Activity_BackToMain);
+        calendarButton = findViewById(R.id.Activity_Calendar);
         fab = findViewById(R.id.Activity_FAB);
         bottomNavigationView = findViewById(R.id.Activity_BottomNavigation);
+        dateTextView = findViewById(R.id.Activity_DateTextView);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+        String dateString = viewModel.getDateSelected().getValue().format(formatter);
+        dateTextView.setText(dateString);
+
         createActivityFrameLayout.setVisibility(View.GONE);
 
         fragmentManager = getSupportFragmentManager();
         addMyActivityFragment();
 
+        datePicker = MaterialDatePicker.Builder.datePicker()
+                .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
+                .setTitleText("Select date")
+                .build();
         setOnClickListeners();
+        setDateSelectedListener();
     }
 
 
@@ -53,47 +90,51 @@ public class ActivityActivity extends AppCompatActivity {
         createActivityFrameLayout.setVisibility(View.GONE);
     }
 
+
     public void addMyActivityFragment(){
-        fragmentManager.beginTransaction()
-                .add(R.id.Activity_ActivityFrameLayout, PersonalActivityFragment.class, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("personalActivity") // name can be null
-                .commit();
+        addFragmentInActivityFrameLayout(personalActivityFragment,"personalActivity");
     }
 
     public void addFamilyActivityFragment(){
+        addFragmentInActivityFrameLayout(familyActivityFragment,"familyActivity");
+    }
+
+    private void addFragmentInActivityFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
-                .add(R.id.Activity_ActivityFrameLayout, FamilyActivityFragment.class, null)
+                .add(R.id.Activity_ActivityFrameLayout, fragment, null)
                 .setReorderingAllowed(true)
-                .addToBackStack("familyActivity") // name can be null
+                .addToBackStack(stack) // name can be null
                 .commit();
     }
 
-
     //manage create activity fragments
     public void addCreatePersonalActivityFragment(){
-        fragmentManager.beginTransaction()
-                .add(R.id.Activity_CreateActivityFrameLayout, createPersonalActivityFragment, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("createPersonalActivity") // name can be null
-                .commit();
+        addFragmentInCreateActivityFrameLayout(createPersonalActivityFragment,"createPersonalActivity");
     }
 
 
     public void addCreateFamilyActivityFragment(){
-        fragmentManager.beginTransaction()
-                .add(R.id.Activity_CreateActivityFrameLayout, CreatePersonalActivityFragment.class, null)
-                .setReorderingAllowed(true)
-                .addToBackStack("createFamilyActivity") // name can be null
-                .commit();
+        addFragmentInCreateActivityFrameLayout(createFamilyActivityFragment,"createFamilyActivity");
     }
 
     public void addTimePickerFragment(int activityAndTimeType){
         timePickerFragment = TimePickerFragment.newInstance(activityAndTimeType);
+        addFragmentInCreateActivityFrameLayout(timePickerFragment,"AddTimePicker");
+    }
+
+    private void addFragmentInCreateActivityFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
-                .add(R.id.Activity_CreateActivityFrameLayout, timePickerFragment, null)
+                .add(R.id.Activity_ActivityFrameLayout, fragment, null)
                 .setReorderingAllowed(true)
-                .addToBackStack("AddTimePicker") // name can be null
+                .addToBackStack(stack) // name can be null
+                .commit();
+    }
+
+    private void replaceFragmentInCreateActivityFrameLayout(Fragment fragment, String stack){
+        fragmentManager.beginTransaction()
+                .add(R.id.Activity_ActivityFrameLayout, fragment, null)
+                .setReorderingAllowed(true)
+                .addToBackStack(stack) // name can be null
                 .commit();
     }
 
@@ -107,7 +148,42 @@ public class ActivityActivity extends AppCompatActivity {
 
 
 
+    private void setDateSelectedListener() {
+        viewModel.getDateSelected().observe(this, new Observer<LocalDate>() {
+            @Override
+            public void onChanged(LocalDate localDate) {
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+                String dateString = viewModel.getDateSelected().getValue().format(formatter);
+                dateTextView.setText(dateString);
+            }
+        });
+    }
+
+
+
     private void setOnClickListeners() {
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
+
+        calendarButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker.show(fragmentManager,"datePicker");
+            }
+        });
+
+        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener() {
+            @Override
+            public void onPositiveButtonClick(Object selection) {
+                LocalDate localDate = Instant.ofEpochMilli((Long) selection).atZone(ZoneId.systemDefault()).toLocalDate();
+                viewModel.setDateSelected(localDate);
+            }
+        });
+
         bottomNavigationView.setOnItemSelectedListener(new NavigationBarView.OnItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {

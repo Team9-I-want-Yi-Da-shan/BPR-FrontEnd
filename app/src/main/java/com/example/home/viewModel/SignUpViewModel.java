@@ -2,7 +2,6 @@ package com.example.home.viewModel;
 
 import android.text.TextUtils;
 import android.util.Log;
-import android.widget.Toast;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -23,11 +22,6 @@ public class SignUpViewModel extends ViewModel {
 
     MutableLiveData<Boolean> isAccountCreated = new MutableLiveData<>();
 
-    String email;
-    String username;
-    String password;
-    String passwordConfirm;
-
     //Number check
     public static final String REG_NUMBER = ".*\\d+.*";
     //Special character check
@@ -36,8 +30,7 @@ public class SignUpViewModel extends ViewModel {
     public static final String REG_EMAIL = "^([a-z0-9A-Z]+[-|_|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
 
 
-
-    public String validate() {
+    public String validateAndSignUp(String username, String email, String password, String passwordConfirm) {
         if (TextUtils.isEmpty(username)){
             return "You do not insert username!";
         }else if (TextUtils.isEmpty(email)){
@@ -101,37 +94,6 @@ public class SignUpViewModel extends ViewModel {
         return isAccountCreated;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getPasswordConfirm() {
-        return passwordConfirm;
-    }
-
-    public void setPasswordConfirm(String passwordConfirm) {
-        this.passwordConfirm = passwordConfirm;
-    }
 
 
 }
