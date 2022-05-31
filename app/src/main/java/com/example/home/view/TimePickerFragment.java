@@ -122,11 +122,11 @@ public class TimePickerFragment extends Fragment {
                     case 0:
                         viewModel.setmPAStartTime(localDateTime);
                         Logger.debug("stq","time picker time:"+hour+":"+minute);
-                        activity.removeCreatePersonalActivityFragment();
+                        activity.removeTimePickerFragment();
                         break;
                     case 1:
                         viewModel.setmPAEndTime(localDateTime);
-                        activity.removeCreatePersonalActivityFragment();
+                        activity.removeTimePickerFragment();
                         break;
 //                    case 2:
 //                        viewModel.getmFAToCreateMutableLivedata().getValue().setStartTime(localDateTime);

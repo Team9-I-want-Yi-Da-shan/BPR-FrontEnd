@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.home.R;
 import com.example.home.model.dataTransferObject.PersonalActivityDTO;
+import com.example.home.tool.Logger;
 import com.example.home.viewModel.ActivityViewModel;
 
 import java.time.LocalDate;
@@ -35,11 +36,13 @@ public class PersonalActivityFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 
+    private int lastTimeBottomNaviSelectedItem;
+
     ActivityActivity activity;
     ActivityViewModel viewModel;
 
     TextView textView;
-    LottieAnimationView animationView;
+//    LottieAnimationView animationView;
     RecyclerView personalActivityRecyclerView;
     PersonalActivityAdapter personalActivityAdapter;
 
@@ -71,6 +74,7 @@ public class PersonalActivityFragment extends Fragment {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
         }
+        lastTimeBottomNaviSelectedItem =0;
         activity = (ActivityActivity)getActivity();
         viewModel = new ViewModelProvider(getActivity()).get(ActivityViewModel.class);
     }
@@ -86,22 +90,9 @@ public class PersonalActivityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         textView = view.findViewById(R.id.PersonalActivity_Text);
-        animationView = view.findViewById(R.id.PersonalActivity_LoadingAnimation);
+//        animationView = view.findViewById(R.id.PersonalActivity_LoadingAnimation);
         personalActivityRecyclerView = view.findViewById(R.id.PersonalActivity_RecyclerView);
-        animationView.setVisibility(View.GONE);
-
-        String message = viewModel.getGetPAMessage().getValue();
-        if(message.equals("wait")){
-            animationView.setVisibility(View.VISIBLE);
-            animationView.playAnimation();
-        }else if(message.equals("done")){
-            ArrayList<PersonalActivityDTO> personalActivityDTOS = viewModel.getPersonalActivities().getValue();
-            if(personalActivityDTOS.size()>0){
-                personalActivityAdapter.setPersonalActivities(personalActivityDTOS);
-            }else {
-                textView.setText("No activity");
-            }
-        }
+//        animationView.setVisibility(View.GONE);
 
         setUpRecyclerView();
         setUpListeners();
@@ -111,27 +102,36 @@ public class PersonalActivityFragment extends Fragment {
         viewModel.getGetPAMessage().observe(activity, new Observer<String>() {
             @Override
             public void onChanged(String s) {
+                Logger.debug("getPersonalActivity message change", s);
                 switch (s){
                     case "default":
+                        Logger.debug("getPersonalActivity default", "listener default");
                         break;
                     case "wait":
-                        animationView.setVisibility(View.VISIBLE);
-                        animationView.playAnimation();
+//                        animationView.setVisibility(View.VISIBLE);
+//                        animationView.playAnimation();
+                        Logger.debug("getPersonalActivity wait", "listener waiting");
                         break;
                     case "done":
                         ArrayList<PersonalActivityDTO> personalActivityDTOS = viewModel.getPersonalActivities().getValue();
-                        if(personalActivityDTOS.size()>0){
+                        Logger.debug("getPersonalActivity done", personalActivityDTOS.get(0).toString());
+                        Logger.debug("getPersonalActivity done", personalActivityDTOS.get(1).toString());
+                        if(!personalActivityDTOS.isEmpty()){
                             personalActivityAdapter.setPersonalActivities(personalActivityDTOS);
+                            personalActivityAdapter.notifyDataSetChanged();
+                            Logger.debug("getPersonalActivity done", "listener notifyDataSetChanged");
                         }else {
                             textView.setText("No activity");
+                            Logger.debug("getPersonalActivity done", "listener no activity");
                         }
+                        viewModel.setGetPAMessage("default");
+                        break;
                 }
             }
         });
         viewModel.getPersonalActivities().observe(activity, new Observer<ArrayList<PersonalActivityDTO>>() {
             @Override
             public void onChanged(ArrayList<PersonalActivityDTO> personalActivities) {
-
                 personalActivityAdapter.setPersonalActivities(personalActivities);
             }
         });
@@ -139,6 +139,7 @@ public class PersonalActivityFragment extends Fragment {
             @Override
             public void onChanged(LocalDate localDate) {
                 if(viewModel.getBottomNavigationSelectedItem().getValue()==0){
+                    Logger.debug("observe date","监听date调用一次");
                     viewModel.sendGetPersonalActivitiesRequest();
                 }
             }
@@ -146,7 +147,11 @@ public class PersonalActivityFragment extends Fragment {
         viewModel.getBottomNavigationSelectedItem().observe(activity, new Observer<Integer>() {
             @Override
             public void onChanged(Integer integer) {
+                if(lastTimeBottomNaviSelectedItem == integer){
+                    return;
+                }
                 if(integer == 0){
+                    Logger.debug("observe bottom navi","监听底部菜单调用一次");
                     viewModel.sendGetPersonalActivitiesRequest();
                 }
             }

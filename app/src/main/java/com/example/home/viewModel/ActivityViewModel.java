@@ -8,14 +8,14 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.home.model.User;
 import com.example.home.model.dataTransferObject.FamilyActivityDTO;
-import com.example.home.model.dataTransferObject.GetFamilyActivityDTO;
-import com.example.home.model.dataTransferObject.GetPersonalActivityDTO;
+import com.example.home.networking.activityCall.GetFamilyActivityCall;
+import com.example.home.networking.activityCall.GetPersonalActivityCall;
 import com.example.home.model.dataTransferObject.PersonalActivityDTO;
 import com.example.home.networking.ActivityApi;
 import com.example.home.networking.ServiceGenerator;
 import com.example.home.networking.activityResponse.AddPersonalActivityResponse;
 import com.example.home.networking.activityResponse.GetFamilyActivityByDateResponse;
-import com.example.home.networking.activityResponse.GetPersonalActivityByDateResponse;
+import com.example.home.networking.activityResponse.ResultResponse1;
 import com.example.home.tool.Logger;
 
 
@@ -58,38 +58,35 @@ public class ActivityViewModel extends ViewModel {
 
     public ActivityViewModel(){
         dateSelected = new MutableLiveData<>();
-        dateSelected.setValue(LocalDate.now());
-        bottomNavigationSelectedItem = new MutableLiveData<>();
-        bottomNavigationSelectedItem.setValue(0);
+        bottomNavigationSelectedItem = new MutableLiveData<>(0);
 
         personalActivities = new MutableLiveData<>();
+        personalActivities.setValue(new ArrayList<PersonalActivityDTO>());
         familyActivities = new MutableLiveData<>();
+        familyActivities.setValue(new ArrayList<FamilyActivityDTO>());
 
         mPATitle = new MutableLiveData<>();
         mPADescription = new MutableLiveData<>();
         mPAStartTime = new MutableLiveData<>();
         mPAEndTime = new MutableLiveData<>();
-        mPARemind = new MutableLiveData<>();
-        mPARepeat = new MutableLiveData<>();
-        mPAAlarm = new MutableLiveData<>();
-        mPARemind.setValue(-1);
-        mPARepeat.setValue(-1);
-        mPAAlarm.setValue(false);
+        mPARemind = new MutableLiveData<>(-1);
+        mPARepeat = new MutableLiveData<>(-1);
+        mPAAlarm = new MutableLiveData<>(false);
 
-        CreatePAMessage = new MutableLiveData<>();
-        getPAMessage = new MutableLiveData<>();
-        CreatePAMessage.setValue(defaultMessage);
-        getPAMessage.setValue(defaultMessage);
+        CreatePAMessage = new MutableLiveData<>(defaultMessage);
+        getPAMessage = new MutableLiveData<>(defaultMessage);
 
         activityApi = ServiceGenerator.getActivityApi();
     }
 
 
 
-    public String validate() {
-        if(TextUtils.isEmpty(mPATitle.getValue())){return "Please Enter Activity Title";}
-        if(TextUtils.isEmpty(mPADescription.getValue())){return "Please Enter Activity Description";}
+    public String validate(String title, String description) {
+        if(TextUtils.isEmpty(title)){return "Please Enter Activity Title";}
+        if(TextUtils.isEmpty(description)){return "Please Enter Activity Description";}
         if(mPAStartTime.getValue()==null){return "Please Select Start Time";}
+        mPATitle.setValue(title);
+        mPADescription.setValue(description);
         return "ok";
     }
 
@@ -103,7 +100,7 @@ public class ActivityViewModel extends ViewModel {
                 if (response.isSuccessful()) {
                     //create successful
                     CreatePAMessage.setValue(response.body().getMessage());
-                    Logger.debug("CreatePersonalActivity", "Something went wrong :(");
+                    Logger.debug("CreatePersonalActivity", CreatePAMessage.getValue());
                 }
             }
             @EverythingIsNonNull
@@ -121,30 +118,34 @@ public class ActivityViewModel extends ViewModel {
         personalActivityDTO.setTitle(mPATitle.getValue());
         personalActivityDTO.setDescription(mPADescription.getValue());
 
-        ZoneId zoneId = ZoneId.systemDefault(); // or: ZoneId.of("Europe/Oslo");
+        ZoneId zoneId = ZoneId.systemDefault();
         LocalDateTime start_at = mPAStartTime.getValue();
         LocalDateTime end_at = mPAEndTime.getValue();
 
         long startAtToEpoch = start_at.atZone(zoneId).toEpochSecond();
-        long endAtToEpoch = end_at.atZone(zoneId).toEpochSecond();
-
         personalActivityDTO.setStart_at(startAtToEpoch);
-        personalActivityDTO.setStart_at(endAtToEpoch);
-        personalActivityDTO.setIsFinish(0);
+
+        if(end_at!=null){
+            long endAtToEpoch = end_at.atZone(zoneId).toEpochSecond();
+            personalActivityDTO.setFinish_at(endAtToEpoch);
+        }
+
         personalActivityDTO.setReminder(mPARemind.getValue());
 
         if(mPARepeat.getValue()!=-1){
             personalActivityDTO.setRepeat(1);
-            personalActivityDTO.setInterval(mPARepeat.getValue());
+            personalActivityDTO.setRepeat_interval(mPARepeat.getValue());
         }else {
             personalActivityDTO.setRepeat(0);
         }
 
         if(mPAAlarm.getValue()){
-            personalActivityDTO.setIs_alarm(1);
+            personalActivityDTO.setIsAlarm(1);
         }else {
-            personalActivityDTO.setIs_alarm(0);
+            personalActivityDTO.setIsAlarm(0);
         }
+
+        personalActivityDTO.setIsFinish(0);
 
         return personalActivityDTO;
     }
@@ -153,25 +154,24 @@ public class ActivityViewModel extends ViewModel {
         getPAMessage.setValue(waitMessage);
         long epoch = dateSelected.getValue().atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
 
-        GetPersonalActivityDTO getPersonalActivityDTO = new GetPersonalActivityDTO(user.getUserId(),epoch);
-        Logger.debug("getPersonalActivity",getPersonalActivityDTO.toString());
-        Call<GetPersonalActivityByDateResponse> call = activityApi.getPersonalActivityByDate(getPersonalActivityDTO);
+        GetPersonalActivityCall getPersonalActivityCall = new GetPersonalActivityCall(user.getUserId(),epoch);
+        Call<ResultResponse1> call = activityApi.getPersonalActivityByDate(getPersonalActivityCall);
 
-        call.enqueue(new Callback<GetPersonalActivityByDateResponse>() {
+        call.enqueue(new Callback<ResultResponse1>() {
             @EverythingIsNonNull
             @Override
-            public void onResponse(Call<GetPersonalActivityByDateResponse> call, Response<GetPersonalActivityByDateResponse> response) {
+            public void onResponse(Call<ResultResponse1> call, Response<ResultResponse1> response) {
                 if (response.isSuccessful()) {
+                    ArrayList<PersonalActivityDTO> personalActivityDTOS = response.body().getResults().get(0).getPersonalActivityDAOS();
+                    personalActivities.setValue(personalActivityDTOS);
                     getPAMessage.setValue(doneMessage);
-                    personalActivities.setValue(response.body().getPersonalActivityDAOS());
-                    Logger.debug("getPersonalActivity",response.body().toString());
                 }
             }
             @EverythingIsNonNull
             @Override
-            public void onFailure(Call<GetPersonalActivityByDateResponse> call, Throwable t) {
+            public void onFailure(Call<ResultResponse1> call, Throwable t) {
                 getPAMessage.setValue(failMessage);
-                Logger.debug("getPersonalActivity", "Something went wrong :(");
+                Logger.debug("getPersonalActivity", t.getMessage());
             }
         });
     }
@@ -179,7 +179,7 @@ public class ActivityViewModel extends ViewModel {
     public void sendGetFamilyActivitiesResponse() {
         long epoch = dateSelected.getValue().atStartOfDay(ZoneId.systemDefault()).toEpochSecond();
 
-        Call<GetFamilyActivityByDateResponse> call = activityApi.getFamilyActivityByDate(new GetFamilyActivityDTO(user.getFamilyId(),epoch));
+        Call<GetFamilyActivityByDateResponse> call = activityApi.getFamilyActivityByDate(new GetFamilyActivityCall(user.getFamilyId(),epoch));
 
         call.enqueue(new Callback<GetFamilyActivityByDateResponse>() {
             @EverythingIsNonNull

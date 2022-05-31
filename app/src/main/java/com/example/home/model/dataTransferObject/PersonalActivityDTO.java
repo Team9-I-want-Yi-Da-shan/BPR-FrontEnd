@@ -6,19 +6,20 @@ import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
 public class PersonalActivityDTO {
-    private final int secondsPerDay = 86400;
 
-
+    private int activity_id;
     private int user_id;
     private String title;
     private String description;
     private long start_at;
-    private long end_at;
+    private long finish_at;
     private int reminder;
     private int repeat;
-    private int interval;
-    private int is_alarm;
+    private int repeat_interval;
+    private int isAlarm;
     private int isFinish;
+
+    private final int secondsPerDay = 86400;
 
     public PersonalActivityDTO(){ }
 
@@ -45,7 +46,7 @@ public class PersonalActivityDTO {
     }
 
     public LocalDateTime getEndTimeInLocalDateTime(){
-        LocalDateTime endTime = Instant.ofEpochMilli(this.end_at).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        LocalDateTime endTime = Instant.ofEpochMilli(this.finish_at).atZone(ZoneId.systemDefault()).toLocalDateTime();
         return endTime;
     }
 
@@ -62,7 +63,16 @@ public class PersonalActivityDTO {
     }
 
     public int getRepeatInDay(){
-        return interval /secondsPerDay;
+        return repeat_interval /secondsPerDay;
+    }
+
+
+    public int getActivity_id() {
+        return activity_id;
+    }
+
+    public void setActivity_id(int activity_id) {
+        this.activity_id = activity_id;
     }
 
     public int getUser_id() {
@@ -97,12 +107,12 @@ public class PersonalActivityDTO {
         this.start_at = start_at;
     }
 
-    public long getEnd_at() {
-        return end_at;
+    public long getFinish_at() {
+        return finish_at;
     }
 
-    public void setEnd_at(long end_at) {
-        this.end_at = end_at;
+    public void setFinish_at(long finish_at) {
+        this.finish_at = finish_at;
     }
 
     public int getReminder() {
@@ -121,20 +131,20 @@ public class PersonalActivityDTO {
         this.repeat = repeat;
     }
 
-    public int getInterval() {
-        return interval;
+    public int getRepeat_interval() {
+        return repeat_interval;
     }
 
-    public void setInterval(int interval) {
-        this.interval = interval;
+    public void setRepeat_interval(int repeat_interval) {
+        this.repeat_interval = repeat_interval;
     }
 
-    public int getIs_alarm() {
-        return is_alarm;
+    public int getIsAlarm() {
+        return isAlarm;
     }
 
-    public void setIs_alarm(int is_alarm) {
-        this.is_alarm = is_alarm;
+    public void setIsAlarm(int isAlarm) {
+        this.isAlarm = isAlarm;
     }
 
     public int getIsFinish() {
@@ -143,5 +153,22 @@ public class PersonalActivityDTO {
 
     public void setIsFinish(int isFinish) {
         this.isFinish = isFinish;
+    }
+
+    @Override
+    public String toString() {
+        return "PersonalActivityDTO{" +
+                "activity_id=" + activity_id +
+                ", user_id=" + user_id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", start_at=" + start_at +
+                ", finish_at=" + finish_at +
+                ", reminder=" + reminder +
+                ", repeat=" + repeat +
+                ", repeat_interval=" + repeat_interval +
+                ", isAlarm=" + isAlarm +
+                ", isFinish=" + isFinish +
+                '}';
     }
 }

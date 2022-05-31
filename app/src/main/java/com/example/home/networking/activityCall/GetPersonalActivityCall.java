@@ -1,14 +1,14 @@
-package com.example.home.model.dataTransferObject;
+package com.example.home.networking.activityCall;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class GetPersonalActivityDTO {
+public class GetPersonalActivityCall {
 
     private int user_id;
     private long date;
 
-    public GetPersonalActivityDTO(int user_id, long date) {
+    public GetPersonalActivityCall(int user_id, long date) {
         this.user_id = user_id;
         this.date = date;
     }

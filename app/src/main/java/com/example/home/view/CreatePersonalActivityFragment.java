@@ -39,7 +39,7 @@ public class CreatePersonalActivityFragment extends Fragment {
 //    private String mParam1;
 //    private String mParam2;
 
-    ActivityActivity parentActivity;
+    ActivityActivity activity;
     ActivityViewModel viewModel;
 
     ImageButton closeButton;
@@ -90,7 +90,7 @@ public class CreatePersonalActivityFragment extends Fragment {
         }
 
         viewModel = new ViewModelProvider(getActivity()).get(ActivityViewModel.class);
-        parentActivity = (ActivityActivity) getActivity();
+        activity = (ActivityActivity) getActivity();
     }
 
     @Override
@@ -120,7 +120,6 @@ public class CreatePersonalActivityFragment extends Fragment {
         alarmSwitch = getView().findViewById(R.id.CreatePersonalActivity_RemindAlarmSwitch);
 
         setOnClickListeners();
-        setEditTextFocusListeners();
         setCreateActivityTimeOnChangeObservers();
         setCreateActivityResultOnChangeObservers();
     }
@@ -131,10 +130,10 @@ public class CreatePersonalActivityFragment extends Fragment {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String validationResult = viewModel.validate();
+                String validationResult = viewModel.validate(titleEditText.getText().toString(),descriptionEditText.getText().toString());
                 if(validationResult.equals("ok")){
                     viewModel.createPersonalActivity();
-                    parentActivity.closeCreateActivityFragment();
+                    activity.closeCreateActivityFragment();
                 }else {
                     makeToast(validationResult);
                 }
@@ -144,21 +143,22 @@ public class CreatePersonalActivityFragment extends Fragment {
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.closeCreateActivityFragment();
+                activity.removeCreatePersonalActivityFragment();
+                activity.closeCreateActivityFragment();
             }
         });
 
         startTimeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.addTimePickerFragment(0);
+                activity.addTimePickerFragment(0);
             }
         });
 
         endTimeLinearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                parentActivity.addTimePickerFragment(1);
+                activity.addTimePickerFragment(1);
             }
         });
 
@@ -178,28 +178,8 @@ public class CreatePersonalActivityFragment extends Fragment {
     }
 
 
-    private void setEditTextFocusListeners() {
-        titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    viewModel.setmPATitle(titleEditText.getText().toString());
-                }
-            }
-        });
-
-        descriptionEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    viewModel.setmPADescription(descriptionEditText.getText().toString());
-                }
-            }
-        });
-    }
-
     private void setCreateActivityTimeOnChangeObservers() {
-        viewModel.getmPAStartTime().observe(parentActivity, new Observer<LocalDateTime>() {
+        viewModel.getmPAStartTime().observe(activity, new Observer<LocalDateTime>() {
             @Override
             public void onChanged(LocalDateTime localDateTime) {
                 int hour = localDateTime.getHour();
@@ -207,7 +187,7 @@ public class CreatePersonalActivityFragment extends Fragment {
                 startTimeTextView.setText(hour+":"+minute);
             }
         });
-        viewModel.getmPAEndTime().observe(parentActivity, new Observer<LocalDateTime>() {
+        viewModel.getmPAEndTime().observe(activity, new Observer<LocalDateTime>() {
             @Override
             public void onChanged(LocalDateTime localDateTime) {
                 int hour = localDateTime.getHour();
@@ -215,11 +195,10 @@ public class CreatePersonalActivityFragment extends Fragment {
                 endTimeTextView.setText(hour+":"+minute);
             }
         });
-
     }
 
     private void setCreateActivityResultOnChangeObservers(){
-        viewModel.getCreatePAMessage().observe(parentActivity, new Observer<String>() {
+        viewModel.getCreatePAMessage().observe(activity, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 switch(s) {
@@ -228,7 +207,7 @@ public class CreatePersonalActivityFragment extends Fragment {
                     case "activity created":
                         makeToast("Activity created successfully");
                         viewModel.setCreatePAMessage("default");
-                        parentActivity.closeCreateActivityFragment();
+                        activity.closeCreateActivityFragment();
                         break;
                     default:
                         makeToast(s);

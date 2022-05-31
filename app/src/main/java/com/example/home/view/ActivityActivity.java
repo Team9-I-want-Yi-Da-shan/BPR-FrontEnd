@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.home.R;
 import com.example.home.model.User;
+import com.example.home.tool.Logger;
 import com.example.home.viewModel.ActivityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -26,7 +27,6 @@ import com.google.android.material.navigation.NavigationBarView;
 
 import java.time.Instant;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
@@ -57,12 +57,8 @@ public class ActivityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
         viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
+        viewModel.setDateSelected(LocalDate.now());
         getUserPreference();
-
-        personalActivityFragment = PersonalActivityFragment.newInstance();
-        familyActivityFragment = FamilyActivityFragment.newInstance();
-        createPersonalActivityFragment = CreatePersonalActivityFragment.newInstance();
-        createFamilyActivityFragment = CreateFamilyActivityFragment.newInstance();
 
         createActivityFrameLayout = findViewById(R.id.Activity_CreateActivityFrameLayout);
         backButton = findViewById(R.id.Activity_BackToMain);
@@ -77,9 +73,13 @@ public class ActivityActivity extends AppCompatActivity {
 
         createActivityFrameLayout.setVisibility(View.GONE);
 
+        personalActivityFragment = PersonalActivityFragment.newInstance();
+        familyActivityFragment = FamilyActivityFragment.newInstance();
+        createPersonalActivityFragment = CreatePersonalActivityFragment.newInstance();
+        createFamilyActivityFragment = CreateFamilyActivityFragment.newInstance();
+
         fragmentManager = getSupportFragmentManager();
-        addMyActivityFragment();
-        viewModel.sendGetPersonalActivitiesRequest();
+        replaceWithMyActivityFragment();
 
         datePicker = MaterialDatePicker.Builder.datePicker()
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
@@ -105,38 +105,54 @@ public class ActivityActivity extends AppCompatActivity {
     }
 
 
-    public void addMyActivityFragment(){
-        addFragmentInActivityFrameLayout(personalActivityFragment,"personalActivity");
+
+    //manage activity fragments
+    public void replaceWithMyActivityFragment(){
+        replaceFragmentToActivityFrameLayout(personalActivityFragment,"replacePersonalActivity");
+        Logger.debug("replace", "replaceWithMyActivityFragment");
     }
 
-    public void addFamilyActivityFragment(){
-        addFragmentInActivityFrameLayout(familyActivityFragment,"familyActivity");
+    public void replaceWithFamilyActivityFragment(){
+        replaceFragmentToActivityFrameLayout(familyActivityFragment,"replaceFamilyActivity");
     }
 
-    private void addFragmentInActivityFrameLayout(Fragment fragment, String stack){
+    private void replaceFragmentToActivityFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
-                .add(R.id.Activity_ActivityFrameLayout, fragment, null)
+                .replace(R.id.Activity_ActivityFrameLayout, fragment, null)
                 .setReorderingAllowed(true)
                 .addToBackStack(stack) // name can be null
                 .commit();
     }
 
+
+
     //manage create activity fragments
     public void addCreatePersonalActivityFragment(){
-        addFragmentInCreateActivityFrameLayout(createPersonalActivityFragment,"createPersonalActivity");
+        addFragmentToCreateActivityFrameLayout(createPersonalActivityFragment,"addCreatePersonalActivity");
     }
 
+    public void removeCreatePersonalActivityFragment(){
+        removeFragmentFromCreateActivityFrameLayout(createPersonalActivityFragment,"removeCreatePersonalActivity");
+    }
 
     public void addCreateFamilyActivityFragment(){
-        addFragmentInCreateActivityFrameLayout(createFamilyActivityFragment,"createFamilyActivity");
+        addFragmentToCreateActivityFrameLayout(createFamilyActivityFragment,"addCreateFamilyActivity");
+    }
+
+    public void removeCreateFamilyActivityFragment(){
+        removeFragmentFromCreateActivityFrameLayout(createFamilyActivityFragment,"removeCreateFamilyActivity");
     }
 
     public void addTimePickerFragment(int activityAndTimeType){
         timePickerFragment = TimePickerFragment.newInstance(activityAndTimeType);
-        addFragmentInCreateActivityFrameLayout(timePickerFragment,"AddTimePicker");
+        addFragmentToCreateActivityFrameLayout(timePickerFragment,"AddTimePicker");
     }
 
-    private void addFragmentInCreateActivityFrameLayout(Fragment fragment, String stack){
+    public void removeTimePickerFragment(){
+        removeFragmentFromCreateActivityFrameLayout(timePickerFragment,"removeTimePicker");
+    }
+
+    private void addFragmentToCreateActivityFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
                 .add(R.id.Activity_ActivityFrameLayout, fragment, null)
                 .setReorderingAllowed(true)
@@ -144,21 +160,15 @@ public class ActivityActivity extends AppCompatActivity {
                 .commit();
     }
 
-    private void replaceFragmentInCreateActivityFrameLayout(Fragment fragment, String stack){
+    private void removeFragmentFromCreateActivityFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
-                .add(R.id.Activity_ActivityFrameLayout, fragment, null)
+                .remove(fragment)
                 .setReorderingAllowed(true)
                 .addToBackStack(stack) // name can be null
                 .commit();
     }
 
-    public void removeCreatePersonalActivityFragment(){
-        fragmentManager.beginTransaction()
-                .remove(timePickerFragment)
-                .setReorderingAllowed(true)
-                .addToBackStack("RemoveTimePicker") // name can be null
-                .commit();
-    }
+
 
 
 
@@ -203,10 +213,10 @@ public class ActivityActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.Activity_Navigation_MyActivity:
-                        addMyActivityFragment();
+                        replaceWithMyActivityFragment();
                         return true;
                     case R.id.Activity_Navigation_FamilyActivity:
-                        addFamilyActivityFragment();
+                        replaceWithFamilyActivityFragment();
                         return true;
                     default:
                         return false;
