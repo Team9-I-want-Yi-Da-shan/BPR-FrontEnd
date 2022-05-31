@@ -22,23 +22,28 @@ public class LoginViewModel extends ViewModel {
 
 
     MutableLiveData<Boolean> isLoggedIn = new MutableLiveData<>();
-    private User user;
+    final String defaultMessage = "default";
+    MutableLiveData<String> CreateLoginMessage;
+    MutableLiveData<String> email;
+    MutableLiveData<String> password;
+    User user;
 
-
-    public String validateAndLogin(String email, String password) {
-        if (TextUtils.isEmpty(email)){
-            return "Please enter email";
-        }else if (TextUtils.isEmpty(password)){
-            return "Please enter password";
-        } else {
-            login(email, password);
-            return "ok";
-        }
+    public LoginViewModel(){
+        CreateLoginMessage = new MutableLiveData<>();
+        CreateLoginMessage.setValue(defaultMessage);
+        email = new MutableLiveData<>();
+        password = new MutableLiveData<>();
     }
 
-    public void login(String email, String password){
+    public String validate() {
+        if(TextUtils.isEmpty(email.getValue())){return "Please Enter Email";}
+        if(TextUtils.isEmpty(password.getValue())){return "Please Enter Password";}
+        return "ok";
+    }
+
+    public void login(){
         UserApi userApi = ServiceGenerator.getUserApi();
-        Call<LoginResponse> call = userApi.login(new User(email, password));
+        Call<LoginResponse> call = userApi.login(loginUser());
 
         call.enqueue(new Callback<LoginResponse>() {
             @EverythingIsNonNull
@@ -46,6 +51,7 @@ public class LoginViewModel extends ViewModel {
             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                 if (response.isSuccessful()) {
                     user = response.body().getUser();
+                    CreateLoginMessage.setValue(response.body().getMessage());
                     isLoggedIn.setValue(true);
                 }
             }
@@ -58,6 +64,13 @@ public class LoginViewModel extends ViewModel {
         });
     }
 
+    private User loginUser(){
+        User userDTO = new User();
+        userDTO.setEmail(email.getValue());
+        userDTO.setPassword(password.getValue());
+        return userDTO;
+    }
+
     public LiveData<Boolean> getIsLoggedIn()
     {
         return isLoggedIn;
@@ -66,6 +79,27 @@ public class LoginViewModel extends ViewModel {
     public User getResponseUser(){return user;}
 
 
+    public MutableLiveData<String> getEmail() {
+        return email;
+    }
 
+    public void setEmail(String email) {
+        this.email.setValue(email);
+    }
 
+    public MutableLiveData<String> getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password.setValue(password);
+    }
+
+    public MutableLiveData<String> getCreateLoginMessage() {
+        return CreateLoginMessage;
+    }
+
+    public void setCreateLoginMessage(String createLoginMessage) {
+        CreateLoginMessage.setValue(createLoginMessage);
+    }
 }

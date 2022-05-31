@@ -33,7 +33,7 @@
         app:startIconDrawable="@drawable/ic_email">
 
         <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/Login_UsernameTextField"
+            android:id="@+id/Login_EmailTextField"
             android:layout_width="300dp"
             android:layout_height="55dp" />
 

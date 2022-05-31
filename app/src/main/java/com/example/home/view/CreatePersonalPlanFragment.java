@@ -10,10 +10,10 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.home.R;
-import com.example.home.viewModel.ActivityViewModel;
 import com.example.home.viewModel.PlanViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -74,6 +74,7 @@ public class CreatePersonalPlanFragment extends Fragment {
 
         setOnClickListeners();
         setEditTextFocusListeners();
+        setCreatePlanResultOnChangeObservers();
     }
 
 
@@ -83,10 +84,10 @@ public class CreatePersonalPlanFragment extends Fragment {
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String validationResult = viewModel.validate();
+                String validationResult = viewModel.validatePersonalPlan();
                 if(validationResult.equals("ok")){
-                    viewModel.createActivity();
-                    parentActivity.closeCreatePlanFragment();
+                    viewModel.addPersonPlan();
+//                    parentActivity.closeCreatePlanFragment();
                 }else {
                     makeToast(validationResult);
                 }
@@ -125,6 +126,25 @@ public class CreatePersonalPlanFragment extends Fragment {
             public void onFocusChange(View view, boolean hasFocus) {
                 if (!hasFocus) {
                     viewModel.setmPPComment(commentEditText.getText().toString());
+                }
+            }
+        });
+    }
+
+    private void setCreatePlanResultOnChangeObservers(){
+        viewModel.getCreatePPMessage().observe(parentActivity, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch(s) {
+                    case "default":
+                        break;
+                    case "Successfully added":
+                        makeToast("Plan created successfully");
+                        viewModel.setCreatePPMessage("default");
+                        parentActivity.closeCreatePlanFragment();
+                        break;
+                    default:
+                        makeToast(s);
                 }
             }
         });

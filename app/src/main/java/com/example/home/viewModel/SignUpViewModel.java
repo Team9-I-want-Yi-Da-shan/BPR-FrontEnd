@@ -68,16 +68,6 @@ public class SignUpViewModel extends ViewModel {
                     }else{
                         Log.d("Failed Reason",response.errorBody().toString());
                     }
-//                String JsonMessage = response.body().getMessage();
-//                Log.d("Responsestring", JsonMessage);
-//                if (response.isSuccessful()){
-//                    if (JsonMessage!= "Successfully registered"){
-//                        Log.d("onSuccess",response.body().toString());
-//                        isAccountCreated.setValue(true);
-//                    }else {
-//                        Log.d("Fail to create account",JsonMessage);
-//                    }
-//                }
 
             }
             @EverythingIsNonNull

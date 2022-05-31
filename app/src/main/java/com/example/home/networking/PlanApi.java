@@ -2,6 +2,8 @@ package com.example.home.networking;
 
 import com.example.home.model.FamilyPlan;
 import com.example.home.model.PersonalPlan;
+import com.example.home.model.dataTransferObject.FamilyPlanDTO;
+import com.example.home.model.dataTransferObject.PersonalPlanDTO;
 import com.example.home.networking.planResponse.AddFamilyPlanResponse;
 import com.example.home.networking.planResponse.AddPersonPlanResponse;
 import com.example.home.networking.planResponse.GetFamilyPlanByPlanIDResponse;
@@ -25,7 +27,7 @@ public interface PlanApi {
     //PersonalPlan
 
     @POST("addPersonPlan")
-    Call<AddPersonPlanResponse> addPersonalPlan(@Body PersonalPlan plan);
+    Call<AddPersonPlanResponse> addPersonalPlan(@Body PersonalPlanDTO personalPlanDTO);
 
     @POST("getPersonalPlanByPlanID")
     Call<GetPersonalPlanByPlanIDResponse> getPersonalPlanByPlanID(@Body PersonalPlan plan);
@@ -46,7 +48,7 @@ public interface PlanApi {
 
 
     @POST("addFamilyPlan")
-    Call<AddFamilyPlanResponse> addFamilyPlan(@Body FamilyPlan familyPlan);
+    Call<AddFamilyPlanResponse> addFamilyPlan(@Body FamilyPlanDTO familyPlanDTO);
 
     @POST("getFamilyPlanByPlanID")
     Call<GetFamilyPlanByPlanIDResponse> getFamilyPlanByPlanID(@Body FamilyPlan familyPlan);
