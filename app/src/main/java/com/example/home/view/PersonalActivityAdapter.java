@@ -7,18 +7,20 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.home.model.PersonalActivity;
 import com.example.home.R;
+import com.example.home.model.dataTransferObject.PersonalActivityDTO;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
 public class PersonalActivityAdapter extends RecyclerView.Adapter<PersonalActivityAdapter.ViewHolder> {
-    private ArrayList<PersonalActivity> personalActivities;
+    private ArrayList<PersonalActivityDTO> personalActivities;
 
-    public PersonalActivityAdapter() { }
+    public PersonalActivityAdapter() {
+        personalActivities = new ArrayList<PersonalActivityDTO>();
+    }
 
-    public void setPersonalActivities(ArrayList<PersonalActivity> personalActivities){
+    public void setPersonalActivities(ArrayList<PersonalActivityDTO> personalActivities){
         this.personalActivities = personalActivities;
     }
 
@@ -29,10 +31,10 @@ public class PersonalActivityAdapter extends RecyclerView.Adapter<PersonalActivi
     }
 
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
-        viewHolder.timeLabel.setText(personalActivities.get(position).getStartTime().toString());
+        viewHolder.timeLabel.setText(personalActivities.get(position).getStartTimeString());
         viewHolder.title.setText(personalActivities.get(position).getTitle());
         viewHolder.description.setText(personalActivities.get(position).getDescription());
-        String time = personalActivities.get(position).getStartTime().toString() + " - " + personalActivities.get(position).getEndTime().toString();
+        String time = personalActivities.get(position).getStartTimeString() + " - " + personalActivities.get(position).getEndTimeString();
         viewHolder.time.setText(time);
     }
 

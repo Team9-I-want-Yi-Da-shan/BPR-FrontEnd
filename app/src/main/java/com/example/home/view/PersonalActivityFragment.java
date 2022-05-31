@@ -14,13 +14,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
+import com.airbnb.lottie.LottieAnimationView;
 import com.example.home.R;
-import com.example.home.model.PersonalActivity;
+import com.example.home.model.dataTransferObject.PersonalActivityDTO;
 import com.example.home.viewModel.ActivityViewModel;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class PersonalActivityFragment extends Fragment {
@@ -37,6 +38,8 @@ public class PersonalActivityFragment extends Fragment {
     ActivityActivity activity;
     ActivityViewModel viewModel;
 
+    TextView textView;
+    LottieAnimationView animationView;
     RecyclerView personalActivityRecyclerView;
     PersonalActivityAdapter personalActivityAdapter;
 
@@ -82,14 +85,61 @@ public class PersonalActivityFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        personalActivityRecyclerView = getView().findViewById(R.id.PersonalActivity_RecyclerView);
-        setUpRecyclerView();
+        textView = view.findViewById(R.id.PersonalActivity_Text);
+        animationView = view.findViewById(R.id.PersonalActivity_LoadingAnimation);
+        personalActivityRecyclerView = view.findViewById(R.id.PersonalActivity_RecyclerView);
+        animationView.setVisibility(View.GONE);
 
+        String message = viewModel.getGetPAMessage().getValue();
+        if(message.equals("wait")){
+            animationView.setVisibility(View.VISIBLE);
+            animationView.playAnimation();
+        }else if(message.equals("done")){
+            ArrayList<PersonalActivityDTO> personalActivityDTOS = viewModel.getPersonalActivities().getValue();
+            if(personalActivityDTOS.size()>0){
+                personalActivityAdapter.setPersonalActivities(personalActivityDTOS);
+            }else {
+                textView.setText("No activity");
+            }
+        }
+
+        setUpRecyclerView();
+        setUpListeners();
+    }
+
+    private void setUpListeners() {
+        viewModel.getGetPAMessage().observe(activity, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch (s){
+                    case "default":
+                        break;
+                    case "wait":
+                        animationView.setVisibility(View.VISIBLE);
+                        animationView.playAnimation();
+                        break;
+                    case "done":
+                        ArrayList<PersonalActivityDTO> personalActivityDTOS = viewModel.getPersonalActivities().getValue();
+                        if(personalActivityDTOS.size()>0){
+                            personalActivityAdapter.setPersonalActivities(personalActivityDTOS);
+                        }else {
+                            textView.setText("No activity");
+                        }
+                }
+            }
+        });
+        viewModel.getPersonalActivities().observe(activity, new Observer<ArrayList<PersonalActivityDTO>>() {
+            @Override
+            public void onChanged(ArrayList<PersonalActivityDTO> personalActivities) {
+
+                personalActivityAdapter.setPersonalActivities(personalActivities);
+            }
+        });
         viewModel.getDateSelected().observe(activity, new Observer<LocalDate>() {
             @Override
             public void onChanged(LocalDate localDate) {
                 if(viewModel.getBottomNavigationSelectedItem().getValue()==0){
-                    personalActivityAdapter.setPersonalActivities(viewModel.getPersonalActivities());
+                    viewModel.sendGetPersonalActivitiesRequest();
                 }
             }
         });
@@ -97,7 +147,7 @@ public class PersonalActivityFragment extends Fragment {
             @Override
             public void onChanged(Integer integer) {
                 if(integer == 0){
-                    personalActivityAdapter.setPersonalActivities(viewModel.getPersonalActivities());
+                    viewModel.sendGetPersonalActivitiesRequest();
                 }
             }
         });
@@ -106,24 +156,7 @@ public class PersonalActivityFragment extends Fragment {
     private void setUpRecyclerView() {
         personalActivityRecyclerView.hasFixedSize();
         personalActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        ArrayList<PersonalActivity> activities = new ArrayList<>();
-//        LocalDateTime time = LocalDateTime.now();
-//
-//        activities.add(new PersonalActivity("Bulbasaur", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Ivysaur", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Venusaur", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Charmander", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Charmeleon", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Charizard", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Squirtle", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Wartortle", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Blastoise", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Caterpie", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Metapod", "description", time,time,0,0));
-//        activities.add(new PersonalActivity("Butterfree", "description", time,time,0,0));
         personalActivityAdapter = new PersonalActivityAdapter();
-        personalActivityAdapter.setPersonalActivities(viewModel.getPersonalActivities());
         personalActivityRecyclerView.setAdapter(personalActivityAdapter);
     }
 

@@ -16,7 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.home.R;
-import com.example.home.model.FamilyActivity;
+import com.example.home.model.dataTransferObject.FamilyActivityDTO;
 import com.example.home.viewModel.ActivityViewModel;
 
 import java.time.LocalDate;
@@ -84,11 +84,17 @@ public class FamilyActivityFragment extends Fragment {
         familyActivityRecyclerView = getView().findViewById(R.id.FamilyActivity_RecyclerView);
         setUpRecyclerView();
 
+        viewModel.getFamilyActivities().observe(activity, new Observer<ArrayList<FamilyActivityDTO>>() {
+            @Override
+            public void onChanged(ArrayList<FamilyActivityDTO> familyActivityDTOS) {
+                familyActivityAdapter.setFamilyActivities(familyActivityDTOS);
+            }
+        });
         viewModel.getDateSelected().observe(activity, new Observer<LocalDate>() {
             @Override
             public void onChanged(LocalDate localDate) {
                 if(viewModel.getBottomNavigationSelectedItem().getValue()==1){
-                    familyActivityAdapter.setFamilyActivities(viewModel.getFamilyActivities());
+                    viewModel.sendGetFamilyActivitiesResponse();
                 }
             }
         });
@@ -96,7 +102,7 @@ public class FamilyActivityFragment extends Fragment {
             @Override
             public void onChanged(Integer integer) {
                 if(integer == 1){
-                    familyActivityAdapter.setFamilyActivities(viewModel.getFamilyActivities());
+                    viewModel.sendGetFamilyActivitiesResponse();
                 }
             }
         });
@@ -105,19 +111,8 @@ public class FamilyActivityFragment extends Fragment {
     private void setUpRecyclerView() {
         familyActivityRecyclerView.hasFixedSize();
         familyActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-//        ArrayList<FamilyActivity> activities = new ArrayList<>();
-//        String time = "17:00";
-//
-//        activities.add(new FamilyActivity("chifan", "description", time,time,"null","null"));
-//        activities.add(new FamilyActivity("shuijiao", "description", time,time,"null","null"));
-//        activities.add(new FamilyActivity("dadodo", "description", time,time,"null","null"));
-//        activities.add(new FamilyActivity("zuoai", "description", time,time,"null","null"));
         familyActivityAdapter = new FamilyActivityAdapter();
-        familyActivityAdapter.setFamilyActivities(viewModel.getFamilyActivities());
         familyActivityRecyclerView.setAdapter(familyActivityAdapter);
     }
-
-
 
 }

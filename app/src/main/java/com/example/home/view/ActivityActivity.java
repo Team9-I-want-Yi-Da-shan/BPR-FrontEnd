@@ -7,6 +7,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
@@ -15,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 
 import com.example.home.R;
+import com.example.home.model.User;
 import com.example.home.viewModel.ActivityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -55,6 +57,7 @@ public class ActivityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
         viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
+        getUserPreference();
 
         personalActivityFragment = PersonalActivityFragment.newInstance();
         familyActivityFragment = FamilyActivityFragment.newInstance();
@@ -76,13 +79,24 @@ public class ActivityActivity extends AppCompatActivity {
 
         fragmentManager = getSupportFragmentManager();
         addMyActivityFragment();
+        viewModel.sendGetPersonalActivitiesRequest();
 
         datePicker = MaterialDatePicker.Builder.datePicker()
                 .setSelection(MaterialDatePicker.todayInUtcMilliseconds())
                 .setTitleText("Select date")
                 .build();
+
         setOnClickListeners();
         setDateSelectedListener();
+    }
+
+    private void getUserPreference() {
+        SharedPreferences prefs = getSharedPreferences("UserPreference", MODE_PRIVATE);
+        int userId = prefs.getInt("userId",-1);
+        String userName = prefs.getString("userName","");
+        String userEmail = prefs.getString("userEmail","");
+        int familyId = prefs.getInt("familyId",-1);
+        viewModel.setUser(new User(userId,userName,userEmail,familyId));
     }
 
 

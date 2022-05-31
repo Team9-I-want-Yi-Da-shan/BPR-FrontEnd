@@ -1,4 +1,4 @@
-package com.example.home.networking;
+package com.example.home.networking.planResponse;
 
 import com.google.gson.annotations.SerializedName;
 

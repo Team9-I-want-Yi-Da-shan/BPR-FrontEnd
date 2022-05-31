@@ -1,5 +1,6 @@
 package com.example.home.viewModel;
 
+import android.content.SharedPreferences;
 import android.text.TextUtils;
 
 import androidx.lifecycle.LiveData;
@@ -9,7 +10,7 @@ import androidx.lifecycle.ViewModel;
 import com.example.home.model.User;
 import com.example.home.networking.ServiceGenerator;
 import com.example.home.networking.UserApi;
-import com.example.home.networking.LoginResponse;
+import com.example.home.networking.userResponse.LoginResponse;
 import com.example.home.tool.Logger;
 
 import retrofit2.Call;
@@ -63,6 +64,8 @@ public class LoginViewModel extends ViewModel {
     }
 
     public User getResponseUser(){return user;}
+
+
 
 
 }

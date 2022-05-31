@@ -1,16 +1,15 @@
-package com.example.home.networking;
+package com.example.home.networking.userResponse;
 
+import com.example.home.model.User;
 import com.google.gson.annotations.SerializedName;
 
-public class UpdateFamilyPlanResponse {
+public class SignUpResponse {
 
-
-
-    @SerializedName("mesage")
+    @SerializedName("message")
     private String message;
+    private User user;
 
-    public UpdateFamilyPlanResponse(String message) {
-        this.message = message;
+    public SignUpResponse(){
     }
 
     public String getMessage() {
@@ -21,3 +20,5 @@ public class UpdateFamilyPlanResponse {
         this.message = message;
     }
 }
+
+

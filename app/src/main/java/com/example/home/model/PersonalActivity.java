@@ -10,18 +10,20 @@ public class PersonalActivity {
     private LocalDateTime startTime;
     private LocalDateTime endTime;
     private int reminder;
+    private int isAlarm;
     private int repeat;
+    private int isFinish;
 
-
-    public PersonalActivity(String title, String description, LocalDateTime startTime, LocalDateTime endTime, int reminder, int repeat) {
+    public PersonalActivity(String title, String description, LocalDateTime startTime, LocalDateTime endTime, int reminder, int isAlarm, int repeat, int isFinish) {
         this.title = title;
         this.description = description;
         this.startTime = startTime;
         this.endTime = endTime;
         this.reminder = reminder;
+        this.isAlarm = isAlarm;
         this.repeat = repeat;
+        this.isFinish = isFinish;
     }
-
 
     public String getTitle() {
         return title;
@@ -63,11 +65,27 @@ public class PersonalActivity {
         this.reminder = reminder;
     }
 
+    public int getIsAlarm() {
+        return isAlarm;
+    }
+
+    public void setIsAlarm(int isAlarm) {
+        this.isAlarm = isAlarm;
+    }
+
     public int getRepeat() {
         return repeat;
     }
 
     public void setRepeat(int repeat) {
         this.repeat = repeat;
+    }
+
+    public int getIsFinish() {
+        return isFinish;
+    }
+
+    public void setIsFinish(int isFinish) {
+        this.isFinish = isFinish;
     }
 }

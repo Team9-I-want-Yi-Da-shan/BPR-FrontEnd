@@ -1,4 +1,4 @@
-package com.example.home.networking;
+package com.example.home.networking.planResponse;
 
 import com.example.home.model.FamilyPlan;
 import com.example.home.model.PersonalPlan;

@@ -1,6 +1,7 @@
 package com.example.home.view;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.home.R;
+import com.example.home.model.User;
 import com.example.home.viewModel.LoginViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -74,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean.booleanValue() == true) {
+                    saveUserInPreference();
                     startMainActivity();
                 } else {
                     Toast.makeText(getApplicationContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
@@ -126,6 +129,17 @@ public class LoginActivity extends AppCompatActivity {
 
     private void makeToast(String message){
         Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveUserInPreference(){
+        SharedPreferences prefs = getSharedPreferences("UserPreference", MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefs.edit();
+        User user = loginVM.getResponseUser();
+        editor.putInt("userId", user.getUserId());
+        editor.putString("userName", user.getName());
+        editor.putString("userEmail", user.getEmail());
+        editor.putInt("familyId",user.getFamilyId());
+        editor.apply();
     }
 
 }

@@ -9,19 +9,19 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
-import com.example.home.model.FamilyActivity;
+import com.example.home.model.dataTransferObject.FamilyActivityDTO;
 import com.google.android.material.card.MaterialCardView;
 
 import java.util.ArrayList;
 
 public class FamilyActivityAdapter extends RecyclerView.Adapter<FamilyActivityAdapter.ViewHolder>{
 
-    private ArrayList<FamilyActivity> personalActivities;
+    private ArrayList<FamilyActivityDTO> familyActivityDTOS;
 
     public FamilyActivityAdapter() { }
 
-    public void setFamilyActivities(ArrayList<FamilyActivity> familyActivities) {
-        this.personalActivities = familyActivities;
+    public void setFamilyActivities(ArrayList<FamilyActivityDTO> familyActivityDTOS) {
+        this.familyActivityDTOS = familyActivityDTOS;
     }
 
     @NonNull
@@ -34,16 +34,16 @@ public class FamilyActivityAdapter extends RecyclerView.Adapter<FamilyActivityAd
 
     @Override
     public void onBindViewHolder(@NonNull FamilyActivityAdapter.ViewHolder holder, int position) {
-        holder.timeLabel.setText(personalActivities.get(position).getStartTime());
-        holder.title.setText(personalActivities.get(position).getTitle());
-        holder.description.setText(personalActivities.get(position).getDescription());
-        String time = personalActivities.get(position).getStartTime() + " - " + personalActivities.get(position).getEndTime().toString();
+        holder.timeLabel.setText(familyActivityDTOS.get(position).getStartTimeString());
+        holder.title.setText(familyActivityDTOS.get(position).getTitle());
+        holder.description.setText(familyActivityDTOS.get(position).getDescription());
+        String time = familyActivityDTOS.get(position).getStartTimeString() + " - " + familyActivityDTOS.get(position).getEndTimeString();
         holder.time.setText(time);
     }
 
     @Override
     public int getItemCount() {
-        return personalActivities.size();
+        return familyActivityDTOS.size();
     }
 
 

@@ -12,7 +12,7 @@ public class ServiceGenerator {
     public static UserApi getUserApi() {
         if (userApi == null) {
             userApi = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.20:9000/v1/")
+                    .baseUrl("http://192.168.1.20:9000/v1/user/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(UserApi.class);
@@ -23,7 +23,7 @@ public class ServiceGenerator {
     public static ActivityApi getActivityApi() {
         if (activityApi == null) {
             activityApi = new Retrofit.Builder()
-                    .baseUrl("")
+                    .baseUrl("http://192.168.1.20:9000/v1/activity/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(ActivityApi.class);
@@ -34,7 +34,7 @@ public class ServiceGenerator {
     public static PlanApi getPlanApi() {
         if (planApi == null) {
             planApi = new Retrofit.Builder()
-                    .baseUrl("http://192.168.1.20:9000/v1/")
+                    .baseUrl("http://192.168.1.20:9000/v1/plan/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .build()
                     .create(PlanApi.class);

@@ -17,7 +17,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.home.R;
-import com.example.home.tool.Logger;
 import com.example.home.viewModel.ActivityViewModel;
 import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.google.android.material.textfield.TextInputEditText;
@@ -122,7 +121,8 @@ public class CreatePersonalActivityFragment extends Fragment {
 
         setOnClickListeners();
         setEditTextFocusListeners();
-        setLiveDataOnChangeObservers();
+        setCreateActivityTimeOnChangeObservers();
+        setCreateActivityResultOnChangeObservers();
     }
 
 
@@ -133,7 +133,7 @@ public class CreatePersonalActivityFragment extends Fragment {
             public void onClick(View v) {
                 String validationResult = viewModel.validate();
                 if(validationResult.equals("ok")){
-                    viewModel.createActivity();
+                    viewModel.createPersonalActivity();
                     parentActivity.closeCreateActivityFragment();
                 }else {
                     makeToast(validationResult);
@@ -198,7 +198,7 @@ public class CreatePersonalActivityFragment extends Fragment {
         });
     }
 
-    private void setLiveDataOnChangeObservers() {
+    private void setCreateActivityTimeOnChangeObservers() {
         viewModel.getmPAStartTime().observe(parentActivity, new Observer<LocalDateTime>() {
             @Override
             public void onChanged(LocalDateTime localDateTime) {
@@ -213,6 +213,26 @@ public class CreatePersonalActivityFragment extends Fragment {
                 int hour = localDateTime.getHour();
                 int minute = localDateTime.getMinute();
                 endTimeTextView.setText(hour+":"+minute);
+            }
+        });
+
+    }
+
+    private void setCreateActivityResultOnChangeObservers(){
+        viewModel.getCreatePAMessage().observe(parentActivity, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch(s) {
+                    case "default":
+                        break;
+                    case "activity created":
+                        makeToast("Activity created successfully");
+                        viewModel.setCreatePAMessage("default");
+                        parentActivity.closeCreateActivityFragment();
+                        break;
+                    default:
+                        makeToast(s);
+                }
             }
         });
     }

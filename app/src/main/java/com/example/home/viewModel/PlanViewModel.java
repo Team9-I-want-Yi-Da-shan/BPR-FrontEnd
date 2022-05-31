@@ -8,18 +8,18 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.home.model.FamilyPlan;
 import com.example.home.model.PersonalPlan;
-import com.example.home.networking.AddFamilyPlanResponse;
-import com.example.home.networking.AddPersonPlanResponse;
-import com.example.home.networking.GetFamilyPlanByPlanIDResponse;
-import com.example.home.networking.GetFamilyPlanListByFamilyIDResponse;
-import com.example.home.networking.GetPersonPlanListByPersonIDResponse;
-import com.example.home.networking.GetPersonalPlanByPlanIDResponse;
+import com.example.home.networking.planResponse.AddFamilyPlanResponse;
+import com.example.home.networking.planResponse.AddPersonPlanResponse;
+import com.example.home.networking.planResponse.GetFamilyPlanByPlanIDResponse;
+import com.example.home.networking.planResponse.GetFamilyPlanListByFamilyIDResponse;
+import com.example.home.networking.planResponse.GetPersonPlanListByPersonIDResponse;
+import com.example.home.networking.planResponse.GetPersonalPlanByPlanIDResponse;
 import com.example.home.networking.PlanApi;
-import com.example.home.networking.RemoveFamilyPlanByPlanIDResponse;
-import com.example.home.networking.RemovePersonalPlanByPlanIDResponse;
+import com.example.home.networking.planResponse.RemoveFamilyPlanByPlanIDResponse;
+import com.example.home.networking.planResponse.RemovePersonalPlanByPlanIDResponse;
 import com.example.home.networking.ServiceGenerator;
-import com.example.home.networking.UpdateFamilyPlanResponse;
-import com.example.home.networking.UpdatePersonalPlanResponse;
+import com.example.home.networking.planResponse.UpdateFamilyPlanResponse;
+import com.example.home.networking.planResponse.UpdatePersonalPlanResponse;
 import com.example.home.tool.Logger;
 import com.example.home.view.PlanActivity;
 

@@ -1,7 +1,13 @@
-package com.example.home.model;
+package com.example.home.model.dataTransferObject;
 
-public class PersonalActivityDAO {
-    private int person_id;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+
+public class FamilyActivityDTO {
+    private final int secondsPerDay = 86400;
+    private int family_id;
     private String title;
     private String description;
     private long start_at;
@@ -11,16 +17,43 @@ public class PersonalActivityDAO {
     private int repeat;
     private int repeat_interval;
     private int is_alarm;
+    private int[] users;
 
-    public PersonalActivityDAO(){}
+    public FamilyActivityDTO(){}
 
 
-    public int getPerson_id() {
-        return person_id;
+    public LocalDateTime getStartTimeInLocalDateTime(){
+        LocalDateTime startTime = Instant.ofEpochMilli(this.start_at).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        return startTime;
     }
 
-    public void setPerson_id(int person_id) {
-        this.person_id = person_id;
+    public LocalDateTime getEndTimeInLocalDateTime(){
+        LocalDateTime endTime = Instant.ofEpochMilli(this.end_at).atZone(ZoneId.systemDefault()).toLocalDateTime();
+        return endTime;
+    }
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
+    public String getStartTimeString(){
+        LocalDateTime localDateTime = getStartTimeInLocalDateTime();
+        String timeString = localDateTime.format(formatter);
+        return timeString;
+    }
+    public String getEndTimeString(){
+        LocalDateTime localDateTime = getEndTimeInLocalDateTime();
+        String timeString = localDateTime.format(formatter);
+        return timeString;
+    }
+
+    public int getRepeatInDay(){
+        return repeat_interval/secondsPerDay;
+    }
+
+    public int getFamily_id() {
+        return family_id;
+    }
+
+    public void setFamily_id(int family_id) {
+        this.family_id = family_id;
     }
 
     public String getTitle() {
