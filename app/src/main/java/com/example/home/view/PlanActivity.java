@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
 import com.example.home.R;
+import com.example.home.model.User;
 import com.example.home.viewModel.ActivityViewModel;
 import com.example.home.viewModel.PlanViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -47,6 +49,7 @@ public class PlanActivity extends AppCompatActivity {
         fragmentManager = getSupportFragmentManager();
         addMyPlanFragment();
         setOnClickListeners();
+        getUserPreference();
     }
 
     public void closeCreatePlanFragment(){
@@ -79,7 +82,7 @@ public class PlanActivity extends AppCompatActivity {
 
     public void addCreateFamilyPlanFragment(){
         fragmentManager.beginTransaction()
-                .add(R.id.Plan_CreatePlanFrameLayout, CreatePersonalPlanFragment.class, null)
+                .add(R.id.Plan_CreatePlanFrameLayout, CreateFamilyPlanFragment.class, null)
                 .setReorderingAllowed(true)
                 .addToBackStack("createFamilyPlan") // name can be null
                 .commit();
@@ -117,6 +120,16 @@ public class PlanActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+
+    private void getUserPreference() {
+        SharedPreferences prefs = getSharedPreferences("UserPreference", MODE_PRIVATE);
+        int userId = prefs.getInt("userId",-1);
+        String userName = prefs.getString("userName","");
+        String userEmail = prefs.getString("userEmail","");
+        int familyId = prefs.getInt("familyId",-1);
+        viewModel.setUser(new User(userId,userName,userEmail,familyId));
     }
 
 

@@ -23,10 +23,11 @@ public class LoginActivity extends AppCompatActivity {
     LoginViewModel loginVM;
     private boolean isLoading;
 
-    private TextInputEditText usernameField;
+    private TextInputEditText emailField;
     private TextInputEditText passwordField;
     private TextView signUpText;
     private LottieAnimationView loginButton;
+
 
 
     @Override
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         isLoading = false;
-        usernameField = findViewById(R.id.Login_UsernameTextField);
+        emailField = findViewById(R.id.Login_EmailTextField);
         passwordField = findViewById(R.id.Login_PasswordTextField);
         signUpText = findViewById(R.id.Login_SignUpTextView);
         loginButton = findViewById(R.id.Login_Button);
@@ -42,32 +43,10 @@ public class LoginActivity extends AppCompatActivity {
         loginVM = new ViewModelProvider(this).get(LoginViewModel.class);
 
         setOnClickListeners();
-
+        setEditTextFocusListeners();
+        setLoginResultOnChangeObservers();
         setObservers();
 
-//        Animation animation = AnimationUtils.loadAnimation(this, R.anim.animation);
-//        loginButton.startAnimation(animation);
-//        home.addAnimatorListener(new Animator.AnimatorListener() {
-//            @Override
-//            public void onAnimationStart(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationEnd(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationCancel(Animator animator) {
-//
-//            }
-//
-//            @Override
-//            public void onAnimationRepeat(Animator animator) {
-//
-//            }
-//        });
 
     }
 
@@ -77,7 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onChanged(Boolean aBoolean) {
                 if (aBoolean.booleanValue() == true) {
                     saveUserInPreference();
-                    startMainActivity();
+                    //startMainActivity();
                 } else {
                     Toast.makeText(getApplicationContext(), "Something went wrong.", Toast.LENGTH_SHORT).show();
                 }
@@ -97,20 +76,16 @@ public class LoginActivity extends AppCompatActivity {
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                if(isLoading = true) {
-//                    Toast.makeText(LoginActivity.this, "Login in process", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//                isLoading = true;
                 loginButton.setAnimation(R.raw.button_loading);
                 loginButton.playAnimation();
-                String email = usernameField.getText().toString();
-                String password = passwordField.getText().toString();
-                String result = loginVM.validateAndLogin(email,password);
+
+                String result = loginVM.validate();
                 if(result.equals("ok")){
+                    loginVM.login();
+                }else {
                     makeToast(result);
+                };
                 }
-            }
         });
 
     }
@@ -140,6 +115,49 @@ public class LoginActivity extends AppCompatActivity {
         editor.putString("userEmail", user.getEmail());
         editor.putInt("familyId",user.getFamilyId());
         editor.apply();
+    }
+
+    private void setLoginResultOnChangeObservers(){
+        loginVM.getCreateLoginMessage().observe(this, new Observer<String>() {
+            @Override
+            public void onChanged(String s) {
+                switch(s) {
+                    case "default":
+                        break;
+                    case "Invalid login details":
+                        makeToast("Invalid login details");
+                        break;
+                    case "Successfully logged in":
+                        startMainActivity();
+                        makeToast("Successfully logged in");
+                        loginVM.setCreateLoginMessage("default");
+                        break;
+
+                    default:
+                        makeToast(s);
+                }
+            }
+        });
+    }
+
+    private void setEditTextFocusListeners() {
+        emailField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    loginVM.setEmail(emailField.getText().toString());
+                }
+            }
+        });
+
+        passwordField.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    loginVM.setPassword(passwordField.getText().toString());
+                }
+            }
+        });
     }
 
 }
