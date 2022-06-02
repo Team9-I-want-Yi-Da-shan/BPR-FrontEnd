@@ -82,7 +82,7 @@
 
 
     <FrameLayout
-        android:id="@+id/Activity_CreateActivityFrameLayout"
+        android:id="@+id/Activity_CentralFrameLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"

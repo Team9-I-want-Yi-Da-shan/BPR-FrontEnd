@@ -24,7 +24,7 @@
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_wifi_device.xml" value="0.4885" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/ic_wireless.xml" value="0.4885" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/drawable/username_icon.xml" value="0.5235" />
-        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_activity.xml" value="0.525" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_activity.xml" value="0.25" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_activity_schedule.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_bill.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/activity_create_activity.xml" value="0.5083333333333333" />
@@ -51,11 +51,12 @@
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/fragment_join_family.xml" value="0.5" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/fragment_manage_family.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/fragment_personal_activity.xml" value="0.46041666666666664" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/fragment_personal_activity_detail.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/fragment_time_picker.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/fragment_user_profile.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/list_create_personal_activity_item.xml" value="0.5" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/list_family_activity_item.xml" value="0.5" />
-        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/list_personal_activity_item.xml" value="0.2542885973763875" />
+        <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/list_personal_activity_item.xml" value="0.33" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/login_activity.xml" value="0.5" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/layout/personal_activity_fragment.xml" value="0.525" />
         <entry key="..\:/Users/Taiquan Sui/Desktop/home/app/src/main/res/menu/action_bar.xml" value="0.525" />

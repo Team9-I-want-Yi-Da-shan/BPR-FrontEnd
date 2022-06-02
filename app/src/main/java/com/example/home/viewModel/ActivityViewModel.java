@@ -47,17 +47,19 @@ public class ActivityViewModel extends ViewModel {
     MutableLiveData<Integer> mPARemind;
     MutableLiveData<Integer> mPARepeat;
     MutableLiveData<Boolean> mPAAlarm;
+
+    MutableLiveData<String> getPAMessage;
+    MutableLiveData<String> createPAMessage;
     final String defaultMessage = "default";
-    MutableLiveData<String> CreatePAMessage;
     final String waitMessage = "waiting";
     final String doneMessage = "done";
     final String failMessage = "fail";
-    MutableLiveData<String> getPAMessage;
+
 
     ActivityApi activityApi;
 
     public ActivityViewModel(){
-        dateSelected = new MutableLiveData<>();
+        dateSelected = new MutableLiveData<>(LocalDate.now());
         bottomNavigationSelectedItem = new MutableLiveData<>(0);
 
         personalActivities = new MutableLiveData<>();
@@ -73,8 +75,8 @@ public class ActivityViewModel extends ViewModel {
         mPARepeat = new MutableLiveData<>(-1);
         mPAAlarm = new MutableLiveData<>(false);
 
-        CreatePAMessage = new MutableLiveData<>(defaultMessage);
         getPAMessage = new MutableLiveData<>(defaultMessage);
+        createPAMessage = new MutableLiveData<>(defaultMessage);
 
         activityApi = ServiceGenerator.getActivityApi();
     }
@@ -99,8 +101,8 @@ public class ActivityViewModel extends ViewModel {
             public void onResponse(Call<AddPersonalActivityResponse> call, Response<AddPersonalActivityResponse> response) {
                 if (response.isSuccessful()) {
                     //create successful
-                    CreatePAMessage.setValue(response.body().getMessage());
-                    Logger.debug("CreatePersonalActivity", CreatePAMessage.getValue());
+                    createPAMessage.setValue(response.body().getMessage());
+                    Logger.debug("CreatePersonalActivity", createPAMessage.getValue());
                 }
             }
             @EverythingIsNonNull
@@ -133,10 +135,10 @@ public class ActivityViewModel extends ViewModel {
         personalActivityDTO.setReminder(mPARemind.getValue());
 
         if(mPARepeat.getValue()!=-1){
-            personalActivityDTO.setRepeat(1);
+            personalActivityDTO.setIs_repeat(1);
             personalActivityDTO.setRepeat_interval(mPARepeat.getValue());
         }else {
-            personalActivityDTO.setRepeat(0);
+            personalActivityDTO.setIs_repeat(0);
         }
 
         if(mPAAlarm.getValue()){
@@ -162,7 +164,8 @@ public class ActivityViewModel extends ViewModel {
             @Override
             public void onResponse(Call<ResultResponse1> call, Response<ResultResponse1> response) {
                 if (response.isSuccessful()) {
-                    ArrayList<PersonalActivityDTO> personalActivityDTOS = response.body().getResults().get(0).getPersonalActivityDAOS();
+                    ArrayList<PersonalActivityDTO> personalActivityDTOS =
+                            response.body().getResults().get(0).getPersonalActivityDAOS();
                     personalActivities.setValue(personalActivityDTOS);
                     getPAMessage.setValue(doneMessage);
                 }
@@ -170,8 +173,7 @@ public class ActivityViewModel extends ViewModel {
             @EverythingIsNonNull
             @Override
             public void onFailure(Call<ResultResponse1> call, Throwable t) {
-                getPAMessage.setValue(failMessage);
-                Logger.debug("getPersonalActivity", t.getMessage());
+                getPAMessage.setValue(t.getMessage());
             }
         });
     }
@@ -218,8 +220,8 @@ public class ActivityViewModel extends ViewModel {
         return bottomNavigationSelectedItem;
     }
 
-    public void setBottomNavigationSelectedItem(MutableLiveData<Integer> bottomNavigationSelectedItem) {
-        this.bottomNavigationSelectedItem = bottomNavigationSelectedItem;
+    public void setBottomNavigationSelectedItem(Integer bottomNavigationSelectedItem) {
+        this.bottomNavigationSelectedItem.setValue(bottomNavigationSelectedItem);
     }
 
     public MutableLiveData<ArrayList<PersonalActivityDTO>> getPersonalActivities() {
@@ -287,11 +289,11 @@ public class ActivityViewModel extends ViewModel {
     }
 
     public MutableLiveData<String> getCreatePAMessage() {
-        return CreatePAMessage;
+        return createPAMessage;
     }
 
     public void setCreatePAMessage(String createPAMessage) {
-        CreatePAMessage.setValue(createPAMessage);
+        this.createPAMessage.setValue(createPAMessage);
     }
 
     public MutableLiveData<String> getGetPAMessage() {

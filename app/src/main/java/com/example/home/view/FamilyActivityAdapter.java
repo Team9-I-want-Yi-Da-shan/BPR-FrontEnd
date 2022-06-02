@@ -18,6 +18,7 @@ public class FamilyActivityAdapter extends RecyclerView.Adapter<FamilyActivityAd
 
     private ArrayList<FamilyActivityDTO> familyActivityDTOS;
 
+
     public FamilyActivityAdapter() { }
 
     public void setFamilyActivities(ArrayList<FamilyActivityDTO> familyActivityDTOS) {

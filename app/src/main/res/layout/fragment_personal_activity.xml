@@ -21,13 +21,13 @@
         android:layout_gravity="center"
         android:textSize="20dp"/>
 
-<!--    <com.airbnb.lottie.LottieAnimationView-->
-<!--        android:id="@+id/PersonalActivity_LoadingAnimation"-->
-<!--        android:layout_width="match_parent"-->
-<!--        android:layout_height="match_parent"-->
-<!--        app:lottie_rawRes="@raw/loading"-->
-<!--        app:lottie_loop="true"-->
-<!--        app:lottie_autoPlay="false" />-->
+    <com.airbnb.lottie.LottieAnimationView
+        android:id="@+id/PersonalActivity_LoadingAnimation"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:lottie_rawRes="@raw/loading"
+        app:lottie_loop="true"
+        app:lottie_autoPlay="false" />
 
 
 </FrameLayout>

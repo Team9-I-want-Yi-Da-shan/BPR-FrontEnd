@@ -1,11 +1,12 @@
 package com.example.home.model.dataTransferObject;
 
+import java.io.Serializable;
 import java.time.Instant;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 
-public class PersonalActivityDTO {
+public class PersonalActivityDTO implements Serializable {
 
     private int activity_id;
     private int user_id;
@@ -14,7 +15,7 @@ public class PersonalActivityDTO {
     private long start_at;
     private long finish_at;
     private int reminder;
-    private int repeat;
+    private int is_repeat;
     private int repeat_interval;
     private int isAlarm;
     private int isFinish;
@@ -22,21 +23,6 @@ public class PersonalActivityDTO {
     private final int secondsPerDay = 86400;
 
     public PersonalActivityDTO(){ }
-
-
-    //    public PersonalActivity convertToPersonalActivity(){
-//        String title = this.title;
-//        String description = this.description;
-//        LocalDateTime startTime = Instant.ofEpochMilli(this.start_at).atZone(ZoneId.systemDefault()).toLocalDateTime();
-//        LocalDateTime endTime = Instant.ofEpochMilli(this.end_at).atZone(ZoneId.systemDefault()).toLocalDateTime();
-//        int isFinish = this.isFinish;
-//        int reminder = this.reminder;
-//        int isAlarm = this.is_alarm;
-//        //TODO deal with repeat interval
-//        int repeat = (int)this.repeat_interval;
-//
-//        return new PersonalActivity(title,description,startTime,endTime,reminder,isAlarm,repeat,isFinish);
-//    }
 
 
 
@@ -123,12 +109,12 @@ public class PersonalActivityDTO {
         this.reminder = reminder;
     }
 
-    public int getRepeat() {
-        return repeat;
+    public int getIs_repeat() {
+        return is_repeat;
     }
 
-    public void setRepeat(int repeat) {
-        this.repeat = repeat;
+    public void setIs_repeat(int is_repeat) {
+        this.is_repeat = is_repeat;
     }
 
     public int getRepeat_interval() {
@@ -165,7 +151,7 @@ public class PersonalActivityDTO {
                 ", start_at=" + start_at +
                 ", finish_at=" + finish_at +
                 ", reminder=" + reminder +
-                ", repeat=" + repeat +
+                ", repeat=" + is_repeat +
                 ", repeat_interval=" + repeat_interval +
                 ", isAlarm=" + isAlarm +
                 ", isFinish=" + isFinish +

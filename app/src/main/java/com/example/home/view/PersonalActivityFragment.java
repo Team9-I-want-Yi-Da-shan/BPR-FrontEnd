@@ -8,12 +8,14 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
@@ -42,7 +44,7 @@ public class PersonalActivityFragment extends Fragment {
     ActivityViewModel viewModel;
 
     TextView textView;
-//    LottieAnimationView animationView;
+    LottieAnimationView animationView;
     RecyclerView personalActivityRecyclerView;
     PersonalActivityAdapter personalActivityAdapter;
 
@@ -70,11 +72,7 @@ public class PersonalActivityFragment extends Fragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-//            mParam1 = getArguments().getString(ARG_PARAM1);
-//            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-        lastTimeBottomNaviSelectedItem =0;
+        lastTimeBottomNaviSelectedItem = 0;
         activity = (ActivityActivity)getActivity();
         viewModel = new ViewModelProvider(getActivity()).get(ActivityViewModel.class);
     }
@@ -90,56 +88,19 @@ public class PersonalActivityFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         textView = view.findViewById(R.id.PersonalActivity_Text);
-//        animationView = view.findViewById(R.id.PersonalActivity_LoadingAnimation);
+        animationView = view.findViewById(R.id.PersonalActivity_LoadingAnimation);
         personalActivityRecyclerView = view.findViewById(R.id.PersonalActivity_RecyclerView);
-//        animationView.setVisibility(View.GONE);
+        animationView.setVisibility(View.GONE);
 
         setUpRecyclerView();
         setUpListeners();
     }
 
     private void setUpListeners() {
-        viewModel.getGetPAMessage().observe(activity, new Observer<String>() {
-            @Override
-            public void onChanged(String s) {
-                Logger.debug("getPersonalActivity message change", s);
-                switch (s){
-                    case "default":
-                        Logger.debug("getPersonalActivity default", "listener default");
-                        break;
-                    case "wait":
-//                        animationView.setVisibility(View.VISIBLE);
-//                        animationView.playAnimation();
-                        Logger.debug("getPersonalActivity wait", "listener waiting");
-                        break;
-                    case "done":
-                        ArrayList<PersonalActivityDTO> personalActivityDTOS = viewModel.getPersonalActivities().getValue();
-                        Logger.debug("getPersonalActivity done", personalActivityDTOS.get(0).toString());
-                        Logger.debug("getPersonalActivity done", personalActivityDTOS.get(1).toString());
-                        if(!personalActivityDTOS.isEmpty()){
-                            personalActivityAdapter.setPersonalActivities(personalActivityDTOS);
-                            personalActivityAdapter.notifyDataSetChanged();
-                            Logger.debug("getPersonalActivity done", "listener notifyDataSetChanged");
-                        }else {
-                            textView.setText("No activity");
-                            Logger.debug("getPersonalActivity done", "listener no activity");
-                        }
-                        viewModel.setGetPAMessage("default");
-                        break;
-                }
-            }
-        });
-        viewModel.getPersonalActivities().observe(activity, new Observer<ArrayList<PersonalActivityDTO>>() {
-            @Override
-            public void onChanged(ArrayList<PersonalActivityDTO> personalActivities) {
-                personalActivityAdapter.setPersonalActivities(personalActivities);
-            }
-        });
         viewModel.getDateSelected().observe(activity, new Observer<LocalDate>() {
             @Override
             public void onChanged(LocalDate localDate) {
                 if(viewModel.getBottomNavigationSelectedItem().getValue()==0){
-                    Logger.debug("observe date","监听date调用一次");
                     viewModel.sendGetPersonalActivitiesRequest();
                 }
             }
@@ -151,8 +112,38 @@ public class PersonalActivityFragment extends Fragment {
                     return;
                 }
                 if(integer == 0){
-                    Logger.debug("observe bottom navi","监听底部菜单调用一次");
                     viewModel.sendGetPersonalActivitiesRequest();
+                }
+            }
+        });
+        viewModel.getGetPAMessage().observe(activity, new Observer<String>() {
+            @Override
+            public void onChanged(String getPAMessage) {
+                Logger.debug("getPersonalActivity message change", getPAMessage);
+                switch (getPAMessage){
+                    case "default":
+                        Logger.debug("getPersonalActivity default", "listener default");
+                        break;
+                    case "wait":
+                        animationView.setVisibility(View.VISIBLE);
+                        animationView.playAnimation();
+                        break;
+                    case "done":
+                        viewModel.setGetPAMessage("default");
+                        break;
+                    default:
+                        textView.setText(getPAMessage);
+                }
+            }
+        });
+        viewModel.getPersonalActivities().observe(activity, new Observer<ArrayList<PersonalActivityDTO>>() {
+            @Override
+            public void onChanged(ArrayList<PersonalActivityDTO> personalActivities) {
+                if(!personalActivities.isEmpty()){
+                    personalActivityAdapter.setPersonalActivities(personalActivities);
+                    personalActivityAdapter.notifyDataSetChanged();
+                }else {
+                    textView.setText("No activity");
                 }
             }
         });
@@ -162,7 +153,22 @@ public class PersonalActivityFragment extends Fragment {
         personalActivityRecyclerView.hasFixedSize();
         personalActivityRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         personalActivityAdapter = new PersonalActivityAdapter();
+
         personalActivityRecyclerView.setAdapter(personalActivityAdapter);
+        personalActivityRecyclerView.addOnItemTouchListener(new RecyclerTouchListener(
+                activity,
+                personalActivityRecyclerView,
+                new RecyclerTouchListener.ClickListener() {
+                    @Override
+                    public void onClick(View view, int position) {
+                        activity.addPersonalActivityDetailFragment(personalActivityAdapter.getPersonalActivities().get(position));
+                    }
+
+                    @Override
+                    public void onLongClick(View view, int position) {
+
+                    }
+                }));
     }
 
 

@@ -133,7 +133,6 @@ public class CreatePersonalActivityFragment extends Fragment {
                 String validationResult = viewModel.validate(titleEditText.getText().toString(),descriptionEditText.getText().toString());
                 if(validationResult.equals("ok")){
                     viewModel.createPersonalActivity();
-                    activity.closeCreateActivityFragment();
                 }else {
                     makeToast(validationResult);
                 }
@@ -144,7 +143,7 @@ public class CreatePersonalActivityFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 activity.removeCreatePersonalActivityFragment();
-                activity.closeCreateActivityFragment();
+                activity.closeCentralFrameLayout();
             }
         });
 
@@ -207,7 +206,8 @@ public class CreatePersonalActivityFragment extends Fragment {
                     case "activity created":
                         makeToast("Activity created successfully");
                         viewModel.setCreatePAMessage("default");
-                        activity.closeCreateActivityFragment();
+                        activity.removeCreatePersonalActivityFragment();
+                        activity.closeCentralFrameLayout();
                         break;
                     default:
                         makeToast(s);

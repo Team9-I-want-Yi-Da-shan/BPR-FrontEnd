@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.example.home.R;
 import com.example.home.model.User;
+import com.example.home.model.dataTransferObject.PersonalActivityDTO;
 import com.example.home.tool.Logger;
 import com.example.home.viewModel.ActivityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -48,6 +49,8 @@ public class ActivityActivity extends AppCompatActivity {
     PersonalActivityFragment personalActivityFragment;
     FamilyActivityFragment familyActivityFragment;
 
+    PersonalActivityDetailFragment personalActivityDetailFragment;
+
     CreatePersonalActivityFragment createPersonalActivityFragment;
     CreateFamilyActivityFragment createFamilyActivityFragment;
     TimePickerFragment timePickerFragment;
@@ -57,10 +60,9 @@ public class ActivityActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_activity);
         viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
-        viewModel.setDateSelected(LocalDate.now());
-        getUserPreference();
+        getUserSharedPreference();
 
-        createActivityFrameLayout = findViewById(R.id.Activity_CreateActivityFrameLayout);
+        createActivityFrameLayout = findViewById(R.id.Activity_CentralFrameLayout);
         backButton = findViewById(R.id.Activity_BackToMain);
         calendarButton = findViewById(R.id.Activity_Calendar);
         fab = findViewById(R.id.Activity_FAB);
@@ -90,7 +92,7 @@ public class ActivityActivity extends AppCompatActivity {
         setDateSelectedListener();
     }
 
-    private void getUserPreference() {
+    private void getUserSharedPreference() {
         SharedPreferences prefs = getSharedPreferences("UserPreference", MODE_PRIVATE);
         int userId = prefs.getInt("userId",-1);
         String userName = prefs.getString("userName","");
@@ -100,8 +102,9 @@ public class ActivityActivity extends AppCompatActivity {
     }
 
 
-    public void closeCreateActivityFragment(){
+    public void closeCentralFrameLayout(){
         createActivityFrameLayout.setVisibility(View.GONE);
+        fab.setVisibility(View.VISIBLE);
     }
 
 
@@ -109,7 +112,6 @@ public class ActivityActivity extends AppCompatActivity {
     //manage activity fragments
     public void replaceWithMyActivityFragment(){
         replaceFragmentToActivityFrameLayout(personalActivityFragment,"replacePersonalActivity");
-        Logger.debug("replace", "replaceWithMyActivityFragment");
     }
 
     public void replaceWithFamilyActivityFragment(){
@@ -124,49 +126,63 @@ public class ActivityActivity extends AppCompatActivity {
                 .commit();
     }
 
+    //manage activity detail fragments
+    public void addPersonalActivityDetailFragment(PersonalActivityDTO personalActivityDTO){
+        personalActivityDetailFragment = PersonalActivityDetailFragment.newInstance(personalActivityDTO);
+        createActivityFrameLayout.setVisibility(View.VISIBLE);
+        fab.setVisibility(View.GONE);
+        addFragmentToCentralFrameLayout(personalActivityDetailFragment,"addPersonalActivityDetail");
+    }
+
+    public void removePersonalActivityDetailFragment(){
+        removeFragmentFromCentralFrameLayout(personalActivityDetailFragment,"removePersonalActivityDetail");
+    }
 
 
     //manage create activity fragments
     public void addCreatePersonalActivityFragment(){
-        addFragmentToCreateActivityFrameLayout(createPersonalActivityFragment,"addCreatePersonalActivity");
+        fab.setVisibility(View.GONE);
+        addFragmentToCentralFrameLayout(createPersonalActivityFragment,"addCreatePersonalActivity");
     }
 
     public void removeCreatePersonalActivityFragment(){
-        removeFragmentFromCreateActivityFrameLayout(createPersonalActivityFragment,"removeCreatePersonalActivity");
+        removeFragmentFromCentralFrameLayout(createPersonalActivityFragment,"removeCreatePersonalActivity");
     }
 
     public void addCreateFamilyActivityFragment(){
-        addFragmentToCreateActivityFrameLayout(createFamilyActivityFragment,"addCreateFamilyActivity");
+        fab.setVisibility(View.GONE);
+        addFragmentToCentralFrameLayout(createFamilyActivityFragment,"addCreateFamilyActivity");
     }
 
     public void removeCreateFamilyActivityFragment(){
-        removeFragmentFromCreateActivityFrameLayout(createFamilyActivityFragment,"removeCreateFamilyActivity");
+        removeFragmentFromCentralFrameLayout(createFamilyActivityFragment,"removeCreateFamilyActivity");
     }
 
     public void addTimePickerFragment(int activityAndTimeType){
         timePickerFragment = TimePickerFragment.newInstance(activityAndTimeType);
-        addFragmentToCreateActivityFrameLayout(timePickerFragment,"AddTimePicker");
+        addFragmentToCentralFrameLayout(timePickerFragment,"AddTimePicker");
     }
 
     public void removeTimePickerFragment(){
-        removeFragmentFromCreateActivityFrameLayout(timePickerFragment,"removeTimePicker");
+        removeFragmentFromCentralFrameLayout(timePickerFragment,"removeTimePicker");
     }
 
-    private void addFragmentToCreateActivityFrameLayout(Fragment fragment, String stack){
+    private void addFragmentToCentralFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
-                .add(R.id.Activity_ActivityFrameLayout, fragment, null)
+                .add(R.id.Activity_CentralFrameLayout, fragment, null)
                 .setReorderingAllowed(true)
                 .addToBackStack(stack) // name can be null
                 .commit();
     }
 
-    private void removeFragmentFromCreateActivityFrameLayout(Fragment fragment, String stack){
+    private void removeFragmentFromCentralFrameLayout(Fragment fragment, String stack){
         fragmentManager.beginTransaction()
                 .remove(fragment)
                 .setReorderingAllowed(true)
                 .addToBackStack(stack) // name can be null
                 .commit();
     }
+
 
 
 
@@ -182,8 +198,6 @@ public class ActivityActivity extends AppCompatActivity {
             }
         });
     }
-
-
 
     private void setOnClickListeners() {
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -213,9 +227,11 @@ public class ActivityActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.Activity_Navigation_MyActivity:
+                        viewModel.setBottomNavigationSelectedItem(0);
                         replaceWithMyActivityFragment();
                         return true;
                     case R.id.Activity_Navigation_FamilyActivity:
+                        viewModel.setBottomNavigationSelectedItem(1);
                         replaceWithFamilyActivityFragment();
                         return true;
                     default:

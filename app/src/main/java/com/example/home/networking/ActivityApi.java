@@ -19,11 +19,6 @@ import retrofit2.http.PUT;
 
 public interface ActivityApi {
 
-    //general
-    @POST("setFinish")
-    Call<FinishActivityResponse> setActivityFinish(@Body FinishActivityCall finishActivityCall);
-
-
     //personal activity
     @POST("addPersonalActivity")
     Call<AddPersonalActivityResponse> addPersonalActivity(@Body PersonalActivityDTO personalActivityDTO);
@@ -35,7 +30,6 @@ public interface ActivityApi {
     Call<UpdateActivityResponse> updatePersonalActivity(@Body PersonalActivityDTO personalActivityDTO);
 
 
-
     //family activity
     @POST("addFamilyActivity")
     Call<AddFamilyActivityResponse> addFamilyActivity(@Body FamilyActivityDTO familyActivityDTO);
@@ -45,5 +39,9 @@ public interface ActivityApi {
 
     @PUT("updateActivity")
     Call<UpdateActivityResponse> updateFamilyActivity(@Body FamilyActivityDTO familyActivityDTO);
+
+    //general
+    @POST("setFinish")
+    Call<FinishActivityResponse> setActivityFinish(@Body FinishActivityCall finishActivityCall);
 
 }
