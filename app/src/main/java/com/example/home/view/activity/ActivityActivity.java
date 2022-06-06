@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.activity;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +18,7 @@ import android.widget.TextView;
 import com.example.home.R;
 import com.example.home.model.User;
 import com.example.home.model.dataTransferObject.PersonalActivityDTO;
-import com.example.home.tool.Logger;
+import com.example.home.view.CreatePersonalActivityFragment;
 import com.example.home.viewModel.ActivityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
@@ -36,7 +36,7 @@ public class ActivityActivity extends AppCompatActivity {
     ActivityViewModel viewModel;
     FragmentManager fragmentManager;
 
-    FrameLayout createActivityFrameLayout;
+    FrameLayout centralFrameLayout;
 
     ImageButton backButton;
     ImageButton calendarButton;
@@ -62,7 +62,7 @@ public class ActivityActivity extends AppCompatActivity {
         viewModel = new ViewModelProvider(this).get(ActivityViewModel.class);
         getUserSharedPreference();
 
-        createActivityFrameLayout = findViewById(R.id.Activity_CentralFrameLayout);
+        centralFrameLayout = findViewById(R.id.Activity_CentralFrameLayout);
         backButton = findViewById(R.id.Activity_BackToMain);
         calendarButton = findViewById(R.id.Activity_Calendar);
         fab = findViewById(R.id.Activity_FAB);
@@ -73,7 +73,7 @@ public class ActivityActivity extends AppCompatActivity {
         String dateString = viewModel.getDateSelected().getValue().format(formatter);
         dateTextView.setText(dateString);
 
-        createActivityFrameLayout.setVisibility(View.GONE);
+        centralFrameLayout.setVisibility(View.GONE);
 
         personalActivityFragment = PersonalActivityFragment.newInstance();
         familyActivityFragment = FamilyActivityFragment.newInstance();
@@ -103,7 +103,7 @@ public class ActivityActivity extends AppCompatActivity {
 
 
     public void closeCentralFrameLayout(){
-        createActivityFrameLayout.setVisibility(View.GONE);
+        centralFrameLayout.setVisibility(View.GONE);
         fab.setVisibility(View.VISIBLE);
     }
 
@@ -129,7 +129,7 @@ public class ActivityActivity extends AppCompatActivity {
     //manage activity detail fragments
     public void addPersonalActivityDetailFragment(PersonalActivityDTO personalActivityDTO){
         personalActivityDetailFragment = PersonalActivityDetailFragment.newInstance(personalActivityDTO);
-        createActivityFrameLayout.setVisibility(View.VISIBLE);
+        centralFrameLayout.setVisibility(View.VISIBLE);
         fab.setVisibility(View.GONE);
         addFragmentToCentralFrameLayout(personalActivityDetailFragment,"addPersonalActivityDetail");
     }
@@ -246,11 +246,11 @@ public class ActivityActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(bottomNavigationView.getSelectedItemId()==R.id.Activity_Navigation_MyActivity){
                     addCreatePersonalActivityFragment();
-                    createActivityFrameLayout.setVisibility(View.VISIBLE);
+                    centralFrameLayout.setVisibility(View.VISIBLE);
                 }
                 if(bottomNavigationView.getSelectedItemId()==R.id.Activity_Navigation_FamilyActivity){
                     addCreateFamilyActivityFragment();
-                    createActivityFrameLayout.setVisibility(View.VISIBLE);
+                    centralFrameLayout.setVisibility(View.VISIBLE);
                 }
             }
         });

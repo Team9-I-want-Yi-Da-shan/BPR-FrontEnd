@@ -8,11 +8,11 @@ import androidx.lifecycle.ViewModel;
 
 import com.example.home.model.User;
 import com.example.home.model.dataTransferObject.FamilyActivityDTO;
+import com.example.home.networking.Apis.ActivityApi;
+import com.example.home.networking.Apis.ServiceGenerator;
 import com.example.home.networking.activityCall.GetFamilyActivityCall;
 import com.example.home.networking.activityCall.GetPersonalActivityCall;
 import com.example.home.model.dataTransferObject.PersonalActivityDTO;
-import com.example.home.networking.ActivityApi;
-import com.example.home.networking.ServiceGenerator;
 import com.example.home.networking.activityResponse.AddPersonalActivityResponse;
 import com.example.home.networking.activityResponse.GetFamilyActivityByDateResponse;
 import com.example.home.networking.activityResponse.ResultResponse1;

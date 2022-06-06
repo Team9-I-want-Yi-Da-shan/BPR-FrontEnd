@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.activity;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;

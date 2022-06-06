@@ -15,7 +15,7 @@
         android:theme="@style/Theme.App"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".view.UserProfileActivity"
+            android:name=".view.profile.UserProfileActivity"
             android:exported="false" />
 
         <uses-library
@@ -23,7 +23,7 @@
             android:required="false" />
 
         <activity
-            android:name=".view.PlanActivity"
+            android:name=".view.plan.PlanActivity"
             android:exported="false" />
         <activity
             android:name=".view.BillActivity"
@@ -32,16 +32,16 @@
             android:name=".view.SmartHomeActivity"
             android:exported="false" />
         <activity
-            android:name=".view.ActivityActivity"
+            android:name=".view.activity.ActivityActivity"
             android:exported="false" />
         <activity
             android:name=".view.MainActivity"
             android:exported="false" />
         <activity
-            android:name=".view.LoginActivity"
+            android:name=".view.login.LoginActivity"
             android:exported="false" />
         <activity
-            android:name=".view.SignUpActivity"
+            android:name=".view.login.SignUpActivity"
             android:exported="false" />
         <activity
             android:name=".view.StartActivity"

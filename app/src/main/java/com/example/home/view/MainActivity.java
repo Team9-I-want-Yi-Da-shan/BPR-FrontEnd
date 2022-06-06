@@ -11,6 +11,9 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.home.R;
 import com.example.home.model.User;
+import com.example.home.view.activity.ActivityActivity;
+import com.example.home.view.plan.PlanActivity;
+import com.example.home.view.profile.UserProfileActivity;
 import com.example.home.viewModel.MainViewModel;
 import com.google.android.material.card.MaterialCardView;
 

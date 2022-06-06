@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.view.View;
 
 import com.example.home.R;
+import com.example.home.view.login.LoginActivity;
 
 public class StartActivity extends AppCompatActivity {
 

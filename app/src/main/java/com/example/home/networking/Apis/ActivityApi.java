@@ -1,4 +1,4 @@
-package com.example.home.networking;
+package com.example.home.networking.Apis;
 
 import com.example.home.model.dataTransferObject.FamilyActivityDTO;
 import com.example.home.networking.activityCall.FinishActivityCall;

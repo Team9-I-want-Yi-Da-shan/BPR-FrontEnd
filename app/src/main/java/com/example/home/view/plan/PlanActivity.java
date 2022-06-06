@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.plan;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,12 +13,14 @@ import android.widget.FrameLayout;
 
 import com.example.home.R;
 import com.example.home.model.User;
-import com.example.home.viewModel.ActivityViewModel;
+import com.example.home.view.plan.CreateFamilyPlanFragment;
+import com.example.home.view.plan.CreatePersonalPlanFragment;
+import com.example.home.view.plan.FamilyPlanFragment;
+import com.example.home.view.plan.PersonalPlanFragment;
 import com.example.home.viewModel.PlanViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationBarView;
-import com.google.android.material.textfield.TextInputEditText;
 
 public class PlanActivity extends AppCompatActivity {
 

@@ -1,4 +1,4 @@
-package com.example.home.networking;
+package com.example.home.networking.Apis;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

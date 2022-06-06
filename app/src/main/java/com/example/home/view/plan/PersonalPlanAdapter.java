@@ -1,15 +1,13 @@
-package com.example.home.view;
+package com.example.home.view.plan;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
-import com.example.home.model.PersonalActivity;
 import com.example.home.model.PersonalPlan;
 import com.google.android.material.card.MaterialCardView;
 

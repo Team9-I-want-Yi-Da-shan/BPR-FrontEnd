@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.plan;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -17,7 +17,7 @@ import com.example.home.R;
 import com.example.home.viewModel.PlanViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 
-public class CreatePersonalPlanFragment extends Fragment {
+public class CreateFamilyPlanFragment extends Fragment {
 
     PlanActivity parentActivity;
     PlanViewModel viewModel;
@@ -25,13 +25,13 @@ public class CreatePersonalPlanFragment extends Fragment {
     ImageButton closeButton;
     ImageButton createButton;
 
-    TextInputEditText titleEditText;
-    TextInputEditText descriptionEditText;
-    TextInputEditText commentEditText;
+    TextInputEditText familyPlanTitleEditText;
+    TextInputEditText familyPlanDescriptionEditText;
+    TextInputEditText familyPlanCommentEditText;
 
 
-    public static CreatePersonalPlanFragment newInstance() {
-        CreatePersonalPlanFragment fragment = new CreatePersonalPlanFragment();
+    public static CreateFamilyPlanFragment newInstance() {
+        CreateFamilyPlanFragment fragment = new CreateFamilyPlanFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -52,24 +52,21 @@ public class CreatePersonalPlanFragment extends Fragment {
     }
 
 
-
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_create_personal_plan, container, false);
+        return inflater.inflate(R.layout.fragment_create_family_plan, container, false);
     }
-
-
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
 
 
-        closeButton = getView().findViewById(R.id.CreatePersonalPlan_CloseCreatePlanCard);
-        createButton = getView().findViewById(R.id.CreatePersonalPlan_CreatePlanButton);
-        titleEditText = getView().findViewById(R.id.CreatePersonalPlan_TitleTextField);
-        descriptionEditText = getView().findViewById(R.id.CreatePersonalPlan_DescriptionTextField);
-        commentEditText = getView().findViewById(R.id.CreatePersonalPlan_CommentTextField);
+        closeButton = getView().findViewById(R.id.CreateFamilyPlan_CloseCreatePlanCard);
+        createButton = getView().findViewById(R.id.CreateFamilyPlan_CreatePlanButton);
+        familyPlanTitleEditText = getView().findViewById(R.id.CreateFamilyPlan_TitleTextField);
+        familyPlanDescriptionEditText = getView().findViewById(R.id.CreateFamilyPlan_DescriptionTextField);
+        familyPlanCommentEditText = getView().findViewById(R.id.CreateFamilyPlan_CommentTextField);
 
 
         setOnClickListeners();
@@ -79,15 +76,16 @@ public class CreatePersonalPlanFragment extends Fragment {
 
 
 
+
     private void setOnClickListeners() {
 
         createButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String validationResult = viewModel.validatePersonalPlan();
+                String validationResult = viewModel.validateFamilyPlan();
                 if(validationResult.equals("ok")){
-                    viewModel.addPersonPlan();
-//                    parentActivity.closeCreatePlanFragment();
+                    viewModel.addFamilyPlan();
+                   // parentActivity.closeCreatePlanFragment();
                 }else {
                     makeToast(validationResult);
                 }
@@ -102,37 +100,10 @@ public class CreatePersonalPlanFragment extends Fragment {
         });
     }
 
-    private void setEditTextFocusListeners() {
-        titleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    viewModel.setmPPTitle(titleEditText.getText().toString());
-                }
-            }
-        });
 
-        descriptionEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    viewModel.setmPPDescription(descriptionEditText.getText().toString());
-                }
-            }
-        });
+    private void setCreatePlanResultOnChangeObservers() {
 
-        commentEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View view, boolean hasFocus) {
-                if (!hasFocus) {
-                    viewModel.setmPPComment(commentEditText.getText().toString());
-                }
-            }
-        });
-    }
-
-    private void setCreatePlanResultOnChangeObservers(){
-        viewModel.getCreatePPMessage().observe(parentActivity, new Observer<String>() {
+        viewModel.getCreateFPMessage().observe(parentActivity, new Observer<String>() {
             @Override
             public void onChanged(String s) {
                 switch(s) {
@@ -140,11 +111,43 @@ public class CreatePersonalPlanFragment extends Fragment {
                         break;
                     case "Successfully added":
                         makeToast("Plan created successfully");
-                        viewModel.setCreatePPMessage("default");
+                        viewModel.setCreateFPMessage("default");
                         parentActivity.closeCreatePlanFragment();
                         break;
                     default:
                         makeToast(s);
+                }
+            }
+        });
+
+    }
+
+
+    private void setEditTextFocusListeners() {
+
+        familyPlanTitleEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    viewModel.setmFPTitle(familyPlanTitleEditText.getText().toString());
+                }
+            }
+        });
+
+        familyPlanDescriptionEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    viewModel.setmFPDescription(familyPlanDescriptionEditText.getText().toString());
+                }
+            }
+        });
+
+        familyPlanCommentEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View view, boolean hasFocus) {
+                if (!hasFocus) {
+                    viewModel.setmFPComment(familyPlanCommentEditText.getText().toString());
                 }
             }
         });
@@ -154,5 +157,6 @@ public class CreatePersonalPlanFragment extends Fragment {
     private void makeToast(String message){
         Toast.makeText(getContext(), message, Toast.LENGTH_SHORT).show();
     }
+
 
 }

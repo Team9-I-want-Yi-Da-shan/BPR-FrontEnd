@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.activity;
 
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -8,20 +8,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.home.R;
 import com.example.home.model.dataTransferObject.PersonalActivityDTO;
-import com.example.home.tool.Logger;
+import com.example.home.view.RecyclerTouchListener;
 import com.example.home.viewModel.ActivityViewModel;
 
 import java.time.LocalDate;
@@ -119,12 +117,10 @@ public class PersonalActivityFragment extends Fragment {
         viewModel.getGetPAMessage().observe(activity, new Observer<String>() {
             @Override
             public void onChanged(String getPAMessage) {
-                Logger.debug("getPersonalActivity message change", getPAMessage);
                 switch (getPAMessage){
                     case "default":
-                        Logger.debug("getPersonalActivity default", "listener default");
                         break;
-                    case "wait":
+                    case "waiting":
                         animationView.setVisibility(View.VISIBLE);
                         animationView.playAnimation();
                         break;

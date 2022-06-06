@@ -1,5 +1,6 @@
-package com.example.home.view;
+package com.example.home.view.profile;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -10,17 +11,18 @@ import androidx.lifecycle.ViewModelProvider;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageButton;
+import android.widget.LinearLayout;
 
 import com.example.home.R;
+import com.example.home.view.login.LoginActivity;
 import com.example.home.viewModel.UserProfileViewModel;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link JoinFamilyFragment#newInstance} factory method to
+ * Use the {@link UserProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class JoinFamilyFragment extends Fragment {
+public class UserProfileFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -30,12 +32,17 @@ public class JoinFamilyFragment extends Fragment {
     // TODO: Rename and change types of parameters
 //    private String mParam1;
 //    private String mParam2;
+
     UserProfileActivity activity;
     UserProfileViewModel viewModel;
 
-    ImageButton closeButton;
+    LinearLayout createFamilyLayout;
+    LinearLayout joinFamilyLayout;
+    LinearLayout familyMembersLayout;
+    LinearLayout LogoutLayout;
+    LinearLayout ChangePasswordLayout;
 
-    public JoinFamilyFragment() {
+    public UserProfileFragment() {
         // Required empty public constructor
     }
 
@@ -46,8 +53,8 @@ public class JoinFamilyFragment extends Fragment {
      * @return A new instance of fragment JoinFamilyFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static JoinFamilyFragment newInstance() {
-        JoinFamilyFragment fragment = new JoinFamilyFragment();
+    public static UserProfileFragment newInstance() {
+        UserProfileFragment fragment = new UserProfileFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
@@ -58,10 +65,10 @@ public class JoinFamilyFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
+//        if (getArguments() != null) {
 //            mParam1 = getArguments().getString(ARG_PARAM1);
 //            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+//        }
         activity = (UserProfileActivity) getActivity();
         viewModel = new ViewModelProvider(getActivity()).get(UserProfileViewModel.class);
     }
@@ -70,21 +77,51 @@ public class JoinFamilyFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_join_family, container, false);
+        return inflater.inflate(R.layout.fragment_user_profile, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        closeButton = getView().findViewById(R.id.JoinFamily_CloseCard);
+        createFamilyLayout = view.findViewById(R.id.Profile_CreateFamilyLayout);
+        joinFamilyLayout = view.findViewById(R.id.Profile_JoinFamilyLayout);
+        familyMembersLayout = view.findViewById(R.id.Profile_FamilyMemberLayout);
+        LogoutLayout = view.findViewById(R.id.Profile_Logout);
+        ChangePasswordLayout = view.findViewById(R.id.Profile_ChangePassword);
+
         setOnClickListeners();
     }
 
     private void setOnClickListeners() {
-        closeButton.setOnClickListener(new View.OnClickListener() {
+        createFamilyLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                activity.removeJoinFamilyFragment();
+                activity.addCreateFamilyFragment();
+            }
+        });
+        joinFamilyLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.addJoinFamilyFragment();
+            }
+        });
+        familyMembersLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                activity.addManageFamilyFragment();
+            }
+        });
+        Intent loginActivity = new Intent(getContext(), LoginActivity.class);
+        LogoutLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startActivity(loginActivity);
+                activity.finish();
+            }
+        });
+        ChangePasswordLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
             }
         });
     }

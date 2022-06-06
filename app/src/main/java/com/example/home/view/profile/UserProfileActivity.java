@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.profile;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
@@ -10,7 +10,6 @@ import android.widget.FrameLayout;
 
 import com.example.home.R;
 import com.example.home.viewModel.UserProfileViewModel;
-import com.google.android.material.appbar.AppBarLayout;
 import com.google.android.material.appbar.MaterialToolbar;
 
 public class UserProfileActivity extends AppCompatActivity {

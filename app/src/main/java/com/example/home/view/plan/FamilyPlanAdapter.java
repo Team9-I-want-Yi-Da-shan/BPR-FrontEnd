@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.plan;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,7 +9,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
-import com.example.home.model.FamilyActivity;
 import com.example.home.model.FamilyPlan;
 import com.google.android.material.card.MaterialCardView;
 

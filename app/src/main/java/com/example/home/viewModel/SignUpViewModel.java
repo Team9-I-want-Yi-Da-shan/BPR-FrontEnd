@@ -8,8 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.home.model.User;
-import com.example.home.networking.ServiceGenerator;
-import com.example.home.networking.UserApi;
+import com.example.home.networking.Apis.ServiceGenerator;
+import com.example.home.networking.Apis.UserApi;
 import com.example.home.networking.userResponse.SignUpResponse;
 import com.example.home.tool.Logger;
 

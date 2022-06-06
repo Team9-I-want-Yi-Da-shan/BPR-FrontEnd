@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.home.R;
+import com.example.home.view.login.LoginActivity;
 import com.example.home.viewModel.SignUpViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 

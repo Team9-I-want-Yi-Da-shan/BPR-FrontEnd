@@ -1,9 +1,8 @@
-package com.example.home.view;
+package com.example.home.view.activity;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -39,7 +38,10 @@ public class PersonalActivityAdapter extends RecyclerView.Adapter<PersonalActivi
         viewHolder.timeLabel.setText(personalActivities.get(position).getStartTimeString());
         viewHolder.title.setText(personalActivities.get(position).getTitle());
         viewHolder.description.setText(personalActivities.get(position).getDescription());
-        String time = personalActivities.get(position).getStartTimeString() + " - " + personalActivities.get(position).getEndTimeString();
+        String time = personalActivities.get(position).getStartTimeString();
+        if (personalActivities.get(position).getFinish_at()!=0){
+            time += " - " + personalActivities.get(position).getEndTimeString();
+        }
         viewHolder.time.setText(time);
     }
 

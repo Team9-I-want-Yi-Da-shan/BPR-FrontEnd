@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".view.CreatePersonalActivityFragment"
+    tools:context=".view.activity.CreatePersonalActivityFragment"
     android:id="@+id/CreatePersonalActivity_Card"
     style="?attr/materialCardViewFilledStyle"
     android:layout_width="340dp"

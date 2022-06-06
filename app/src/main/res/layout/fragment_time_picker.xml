@@ -14,7 +14,7 @@
     app:cardCornerRadius="15dp"
     app:cardElevation="5dp"
     android:backgroundTint="@color/white"
-    tools:context=".view.TimePickerFragment">
+    tools:context=".view.activity.TimePickerFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <ImageButton

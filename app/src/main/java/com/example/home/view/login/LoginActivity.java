@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.login;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -14,6 +14,7 @@ import androidx.lifecycle.ViewModelProvider;
 import com.airbnb.lottie.LottieAnimationView;
 import com.example.home.R;
 import com.example.home.model.User;
+import com.example.home.view.MainActivity;
 import com.example.home.viewModel.LoginViewModel;
 import com.google.android.material.textfield.TextInputEditText;
 

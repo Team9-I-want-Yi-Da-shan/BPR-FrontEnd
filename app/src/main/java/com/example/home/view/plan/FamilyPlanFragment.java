@@ -1,4 +1,4 @@
-package com.example.home.view;
+package com.example.home.view.plan;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -13,35 +13,32 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.home.R;
-import com.example.home.model.PersonalActivity;
-import com.example.home.model.PersonalPlan;
-import com.example.home.viewModel.ActivityViewModel;
+import com.example.home.model.FamilyPlan;
 import com.example.home.viewModel.PlanViewModel;
 
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-public class PersonalPlanFragment extends Fragment {
-
+public class FamilyPlanFragment extends Fragment {
 
     PlanViewModel viewModel;
 
-    RecyclerView personalPlanRecyclerView;
-    PersonalPlanAdapter personalPlanAdapter;
+    RecyclerView familyPlanRecyclerView;
+    FamilyPlanAdapter familyPlanAdapter;
 
-
-    public PersonalPlanFragment() {
+    public FamilyPlanFragment() {
         // Required empty public constructor
     }
 
-    public static PersonalPlanFragment newInstance() {
-        PersonalPlanFragment fragment = new PersonalPlanFragment();
+    public static FamilyPlanFragment newInstance() {
+        FamilyPlanFragment fragment = new FamilyPlanFragment();
         Bundle args = new Bundle();
 //        args.putString(ARG_PARAM1, param1);
 //        args.putString(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
+
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -56,30 +53,33 @@ public class PersonalPlanFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_personal_plan, container, false);
+        return inflater.inflate(R.layout.fragment_family_plan, container, false);
     }
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        personalPlanRecyclerView = getView().findViewById(R.id.PersonalPlan_RecyclerView);
+        familyPlanRecyclerView = getView().findViewById(R.id.FamilyPlan_RecyclerView);
         setUpRecyclerView();
     }
 
+
     private void setUpRecyclerView() {
-        personalPlanRecyclerView.hasFixedSize();
-        personalPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        ArrayList<PersonalPlan> plans = new ArrayList<>();
+        familyPlanRecyclerView.hasFixedSize();
+        familyPlanRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
 
-        plans.add(new PersonalPlan("Bulbasaur", "description", "Comment"));
-        plans.add(new PersonalPlan("Ivysaur", "description","Comment") );
-        plans.add(new PersonalPlan("Venusaur", "description", "Comment"));
-        plans.add(new PersonalPlan("Charmander", "description", "Comment"));
+        ArrayList<FamilyPlan> plans = new ArrayList<>();
+        String time = "17:00";
 
-        personalPlanAdapter = new PersonalPlanAdapter(plans);
-        personalPlanRecyclerView.setAdapter(personalPlanAdapter);
+        plans.add(new FamilyPlan("chifan", "description", "null"));
+        plans.add(new FamilyPlan("shuijiao", "description", "null"));
+        plans.add(new FamilyPlan("dadodo", "description", "null"));
+        plans.add(new FamilyPlan("zuoai", "description", "null"));
+        familyPlanAdapter = new FamilyPlanAdapter(plans);
+        familyPlanRecyclerView.setAdapter(familyPlanAdapter);
     }
 
 

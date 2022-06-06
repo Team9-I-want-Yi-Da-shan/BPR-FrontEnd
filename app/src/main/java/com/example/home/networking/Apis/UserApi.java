@@ -1,4 +1,4 @@
-package com.example.home.networking;
+package com.example.home.networking.Apis;
 
 import com.example.home.model.User;
 import com.example.home.networking.userResponse.LoginResponse;
@@ -14,8 +14,5 @@ public interface UserApi {
 
     @POST("register")
     Call<SignUpResponse> signUp(@Body User user);
-
-
-
 
 }
